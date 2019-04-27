@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "udemy_graphql_dev",
+    "database": "wellbe_waiter",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

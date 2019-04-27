@@ -1,13 +1,23 @@
-import {commentMutation} from "./resources/comment/comment.schema";
-import {postMutations} from './resources/post/post.schema'
-import {userMutations} from './resources/user/user.schema'
+import { categoryMutations } from './resources/category/category.schema'
+import { clientMutations } from './resources/client/client.schema'
+import { itemMutations } from './resources/item/item.schema'
+import { orderMutations } from './resources/order/order.schema'
+import { orderItemMutations } from './resources/orderItem/orderItem.schema'
+import { restaurantMutations } from './resources/restaurant/restaurant.schema'
+import { tableMutations } from './resources/table/table.schema'
+import { tableHistoryMutations } from './resources/tableHistory/tableHistory.schema'
 
 const Mutation = `
   type Mutation {
-    ${commentMutation}
-    ${postMutations}
-    ${userMutations}
+    ${ categoryMutations }
+    ${ clientMutations }
+    ${ itemMutations }
+    ${ orderMutations }
+    ${ orderItemMutations }
+    ${ restaurantMutations }
+    ${ tableMutations }
+    ${ tableHistoryMutations }
   }
-`
+`;
 
 export { Mutation }

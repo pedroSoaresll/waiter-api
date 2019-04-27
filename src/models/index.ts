@@ -7,7 +7,7 @@ const basename: string = path.basename(module.filename)
 const env: string = process.env.NODE_ENV || 'development'
 
 let config = require(path.resolve(`${__dirname}./../config/config.json`))[env]
-let db = null
+let db
 
 if (!db) {
 
@@ -26,13 +26,13 @@ if (!db) {
 
       const model = sequelize.import(path.join(__dirname, file))
       db[model['name']] = model
-  })
+    })
 
   Object.keys(db)
     .forEach((modelName: string) => {
       if (db[modelName].associate)
         db[modelName].associate(db)
-  })
+    })
 
   db['sequelize'] = sequelize
 }

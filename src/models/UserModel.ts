@@ -59,7 +59,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     hooks: {
       beforeCreate: (user: UserInstance, options: Sequelize.CreateOptions): void => {
         const salt = genSaltSync()
-        user.password = hashSync(user.password, salt)
+        user.password = hashSync(user.password!, salt)
       }
     }
   })

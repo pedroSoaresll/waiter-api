@@ -1,24 +1,34 @@
-import {makeExecutableSchema} from 'graphql-tools'
-import {Mutation} from './mutation'
-import {Query} from './query'
-import {commentType} from "./resources/comment/comment.schema";
-import {postTypes} from "./resources/post/post.schema";
-import {userTypes} from "./resources/user/user.schema";
+import { makeExecutableSchema } from 'graphql-tools'
+import { Mutation } from './mutation'
+import { Query } from './query'
+import { categoryTypes } from './resources/category/category.schema'
+import { clientTypes } from './resources/client/client.schema'
+import { itemTypes } from './resources/item/item.schema'
+import { orderTypes } from './resources/order/order.schema'
+import { orderItemTypes } from './resources/orderItem/orderItem.schema'
+import { restaurantTypes } from './resources/restaurant/restaurant.schema'
+import { tableTypes } from './resources/table/table.schema'
+import { tableHistoryTypes } from './resources/tableHistory/tableHistory.schema'
 
 const SchemaDefinition = `
   type Schema {
     query: Query
     mutation: Mutation
   }
-`
+`;
 
 export default makeExecutableSchema({
   typeDefs: [
     SchemaDefinition,
     Mutation,
     Query,
-    commentType,
-    postTypes,
-    userTypes
+    categoryTypes,
+    clientTypes,
+    itemTypes,
+    orderTypes,
+    orderItemTypes,
+    restaurantTypes,
+    tableTypes,
+    tableHistoryTypes,
   ]
 })
