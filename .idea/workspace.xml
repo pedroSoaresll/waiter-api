@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85525245-370c-4001-844d-230d3c970145" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/utils/logger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/oliveira.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/oliveira.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/client/client.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/client/client.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/client/client.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/client/client.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/DbConnectionInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/DbConnectionInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ClientModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ClientModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/TableHistoryModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/TableHistoryModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/OrderModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/OrderModel.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -67,8 +56,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/ClientModel.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+            <state relative-caret-position="355">
+              <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/models/OrderModel.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="382">
+              <caret line="63" column="20" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="20" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -77,42 +78,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/models/TableHistoryModel.ts">
+        <entry file="file://$PROJECT_DIR$/src/models/TableModel.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
-              <caret line="47" column="27" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
-              <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+            <state relative-caret-position="219">
+              <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/graphql/schema.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="21" column="22" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/logger.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1621">
-              <caret line="84" selection-start-line="84" selection-end-line="84" />
             </state>
           </provider>
         </entry>
@@ -179,7 +151,6 @@
         <option value="$PROJECT_DIR$/src/models/TableHistory.ts" />
         <option value="$PROJECT_DIR$/src/models/UserModel.ts" />
         <option value="$PROJECT_DIR$/src/interfaces/ModelsInterface.ts" />
-        <option value="$PROJECT_DIR$/src/models/OrderModel.ts" />
         <option value="$PROJECT_DIR$/src/graphql/resources/category/category.schema.ts" />
         <option value="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.schema.ts" />
         <option value="$PROJECT_DIR$/src/interfaces/DbConnectionInterface.ts" />
@@ -191,6 +162,7 @@
         <option value="$PROJECT_DIR$/src/graphql/resources/client/client.resolvers.ts" />
         <option value="$PROJECT_DIR$/src/models/ClientModel.ts" />
         <option value="$PROJECT_DIR$/src/models/TableHistoryModel.ts" />
+        <option value="$PROJECT_DIR$/src/models/OrderModel.ts" />
       </list>
     </option>
   </component>
@@ -250,12 +222,6 @@
               <item name="waiter-server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="waiter-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="waiter-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -317,16 +283,15 @@
       <workItem from="1556245957048" duration="7308000" />
       <workItem from="1556323126415" duration="4316000" />
       <workItem from="1556633180596" duration="521000" />
-      <workItem from="1556658874181" duration="21773000" />
+      <workItem from="1556658874181" duration="22424000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52090000" />
+    <option name="totallyTimeSpent" value="52741000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="DB Browser" order="0" />
       <window_info id="Gulp" order="1" side_tool="true" />
@@ -515,16 +480,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/OrderModel.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="47" column="6" lean-forward="true" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/interfaces/BaseModelInterface.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -604,16 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/TableModel.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/config/config.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -645,30 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/logger.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1621">
-          <caret line="84" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphql/schema.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/graphql/resources/client/client.schema.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
@@ -693,22 +614,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/TableHistoryModel.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphql/schema.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/logger.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1621">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/ClientModel.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+        <state relative-caret-position="355">
+          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/TableHistoryModel.ts">
+    <entry file="file://$PROJECT_DIR$/src/models/OrderModel.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
-          <caret line="47" column="27" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
-          <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+        <state relative-caret-position="382">
+          <caret line="63" column="20" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/TableModel.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -61,7 +61,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     Order.hasMany(models.OrderItem, {
       foreignKey: {
         allowNull: false,
-        field: 'orderItem'
+        name: 'order'
       }
     });
 
