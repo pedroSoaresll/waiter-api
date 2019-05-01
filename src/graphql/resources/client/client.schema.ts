@@ -14,6 +14,7 @@ const clientTypes = `
 
 const clientQueries = `
   clients: [Client!]!
+  client(id: ID!): Client
 `;
 
 const clientMutations = `

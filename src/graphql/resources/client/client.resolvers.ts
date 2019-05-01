@@ -17,6 +17,17 @@ export const clientResolvers = {
             throw error;
           });
       },
+      client: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+        return db.Client.findOne({
+          where: {
+            id: args.id
+          },
+          limit: 1
+        }).catch(error => {
+          logger.error('error to get client', { error });
+          throw error;
+        });
+      }
     },
     Mutation: {
       createClient: (parent, { input }: { input: CreateClientInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
@@ -26,7 +37,7 @@ export const clientResolvers = {
         }).catch(error => {
           logger.error('error to create a new client', { error });
           throw error;
-        })
+        });
       }
     }
   }
