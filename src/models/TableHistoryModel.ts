@@ -38,21 +38,21 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
   });
 
   TableHistory.associate = (models: ModelsInterface): void => {
-    TableHistory.hasOne(models.Table, {
+    TableHistory.belongsTo(models.Table, {
       foreignKey: {
         allowNull: false,
         field: 'table'
       }
     });
 
-    TableHistory.hasOne(models.Client, {
+    TableHistory.belongsTo(models.Client, {
       foreignKey: {
         allowNull: false,
         field: 'client'
       }
     });
 
-    TableHistory.hasOne(models.Order, {
+    TableHistory.belongsTo(models.Order, {
       foreignKey: {
         allowNull: false,
         field: 'order'

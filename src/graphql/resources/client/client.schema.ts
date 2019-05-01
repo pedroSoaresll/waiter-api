@@ -6,12 +6,18 @@ const clientTypes = `
     createdAt: String!
     updatedAt: String!
   }
+  
+  input CreateClientInput {
+    name: String!
+  }
 `;
 
 const clientQueries = `
   clients: [Client!]!
 `;
 
-const clientMutations = ``;
+const clientMutations = `
+  createClient(input: CreateClientInput!): Client!
+`;
 
 export { clientTypes, clientQueries, clientMutations }

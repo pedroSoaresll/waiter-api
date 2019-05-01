@@ -3,10 +3,10 @@ import { v4 as uuid } from 'uuid';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 
 export interface ClientAttributes {
-  id: string
+  id?: string
   name: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export interface ClientInstance extends Sequelize.Instance<ClientAttributes>, ClientAttributes {}
@@ -16,7 +16,6 @@ export interface ClientModel extends BaseModelInterface, Sequelize.Model<ClientI
 export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): ClientModel => {
 
   return <ClientModel>sequelize.define('Client', {
-
     id: {
       type: DataTypes.UUID,
       allowNull: false,
