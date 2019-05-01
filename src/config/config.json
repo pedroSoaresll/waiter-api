@@ -4,7 +4,7 @@
     "password": null,
     "database": "wellbe_waiter",
     "host": "localhost",
-    "port": "33206",
+    "port": "3306",
     "dialect": "mysql"
   },
   "test": {
