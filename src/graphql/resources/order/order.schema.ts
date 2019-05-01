@@ -8,8 +8,8 @@ const orderTypes = `
     client: Client!
     amount: String
     status: OrderStatusEnum!
-    created_at: String!
-    updated_at: String!
+    createdAt: String!
+    updatedAt: String!
   }
   
   enum OrderStatusEnum {

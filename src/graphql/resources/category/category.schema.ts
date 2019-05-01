@@ -5,8 +5,8 @@ const categoryTypes = `
     restaurant: Restaurant!
     name: String!
     icon: String
-    created_at: String!
-    updated_at: String!
+    createdAt: String!
+    updatedAt: String!
   }
   
   input CreateCategoryInput {

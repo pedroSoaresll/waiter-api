@@ -6,8 +6,8 @@ const tableTypes = `
     name: String!
     qrcode: String!
     status: TableStatusEnum!
-    created_at: String!
-    updated_at: String!
+    createdAt: String!
+    updatedAt: String!
   }
   
   enum TableStatusEnum {

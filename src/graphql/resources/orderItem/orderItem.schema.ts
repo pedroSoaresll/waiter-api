@@ -5,10 +5,10 @@ const orderItemTypes = `
     item: Item!
     order: Order!
     status: OrderItemStatusEnum!
-    created_at: String!
-    updated_at: String!
-    doing_at: String
-    done_at: String
+    createdAt: String!
+    updatedAt: String!
+    doingAt: String
+    doneAt: String
   }
   
   enum OrderItemStatusEnum {

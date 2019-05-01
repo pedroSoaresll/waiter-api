@@ -7,8 +7,8 @@ const itemTypes = `
     name: String!
     amount: String!
     status: ItemStatusEnum!
-    created_at: String!
-    updated_at: String!
+    createdAt: String!
+    updatedAt: String!
   }
   
   enum ItemStatusEnum {

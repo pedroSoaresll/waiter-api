@@ -3,8 +3,8 @@ const restaurantTypes = `
   type Restaurant {
     id: ID!
     name: String!
-    created_at: String!
-    updated_at: String!
+    createdAt: String!
+    updatedAt: String!
   }
   
   input CreateRestaurantInput {

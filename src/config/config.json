@@ -3,7 +3,8 @@
     "username": "root",
     "password": null,
     "database": "wellbe_waiter",
-    "host": "127.0.0.1",
+    "host": "localhost",
+    "port": "33206",
     "dialect": "mysql"
   },
   "test": {

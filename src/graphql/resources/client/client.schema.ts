@@ -3,12 +3,14 @@ const clientTypes = `
   type Client {
     id: ID!
     name: String
-    created_at: String!
-    updated_at: String!
+    createdAt: String!
+    updatedAt: String!
   }
 `;
 
-const clientQueries = ``;
+const clientQueries = `
+  clients: [Client!]!
+`;
 
 const clientMutations = ``;
 

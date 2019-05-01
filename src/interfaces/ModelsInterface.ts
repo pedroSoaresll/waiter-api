@@ -1,10 +1,19 @@
-import {UserModel} from "../models/UserModel";
-import {PostModel} from "../models/PostModel";
-import {CommentModel} from "../models/CommentModel";
+import { ClientModel } from '../models/ClientModel';
+import { RestaurantModel } from '../models/RestaurantModel';
+import { CategoryModel } from '../models/CategoryModel';
+import { ItemModel } from '../models/ItemModel';
+import { OrderModel } from '../models/OrderModel';
+import { TableModel } from '../models/TableModel';
+import { OrderItemModel } from '../models/OrderItemModel';
+import { TableHistoryModel } from '../models/TableHistoryModel';
 
 export interface ModelsInterface {
-
-  Comment: CommentModel
-  Post: PostModel
-  User: UserModel
+  Client: ClientModel
+  Restaurant: RestaurantModel
+  Category: CategoryModel
+  Item: ItemModel
+  Order: OrderModel
+  Table: TableModel
+  OrderItem: OrderItemModel
+  TableHistory: TableHistoryModel
 }

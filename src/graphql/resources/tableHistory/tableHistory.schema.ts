@@ -5,9 +5,9 @@ const tableHistoryTypes = `
     table: Table!
     client: Client!
     order: Order!
-    created_at: String!
-    updated_at: String!
-    unemployment_at: String!
+    createdAt: String!
+    updatedAt: String!
+    unemploymentAt: String!
   }
 `;
 
