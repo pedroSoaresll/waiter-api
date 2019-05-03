@@ -6,6 +6,7 @@ import { orderItemMutations } from './resources/orderItem/orderItem.schema'
 import { restaurantMutations } from './resources/restaurant/restaurant.schema'
 import { tableMutations } from './resources/table/table.schema'
 import { tableHistoryMutations } from './resources/tableHistory/tableHistory.schema'
+import { tokenMutation } from './resources/token/token.schema';
 
 const Mutation = `
   type Mutation {
@@ -17,6 +18,7 @@ const Mutation = `
     ${ restaurantMutations }
     ${ tableMutations }
     ${ tableHistoryMutations }
+    ${ tokenMutation }
   }
 `;
 

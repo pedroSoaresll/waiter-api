@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { merge } from 'lodash';
+import { mergeWith } from 'lodash';
 import { Mutation } from './mutation';
 import { Query } from './query';
 import { categoryTypes } from './resources/category/category.schema';
@@ -11,9 +11,14 @@ import { restaurantTypes } from './resources/restaurant/restaurant.schema';
 import { tableTypes } from './resources/table/table.schema';
 import { tableHistoryTypes } from './resources/tableHistory/tableHistory.schema';
 import { clientResolvers } from './resources/client/client.resolvers';
+import { tokenTypes } from './resources/token/token.schema';
+import { tokenResolvers } from './resources/token/token.resolvers';
+import { restaurantResolvers } from './resources/restaurant/restaurant.resolvers';
 
-const resolvers = merge(
-  clientResolvers
+const resolvers = mergeWith(
+  clientResolvers,
+  tokenResolvers,
+  restaurantResolvers
 );
 
 const SchemaDefinition = `
@@ -36,6 +41,7 @@ export default makeExecutableSchema({
     restaurantTypes,
     tableTypes,
     tableHistoryTypes,
+    tokenTypes,
   ],
   resolvers,
 });

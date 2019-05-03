@@ -9,36 +9,39 @@ interface CreateClientInput {
 }
 
 export const clientResolvers = {
-    Query: {
-      clients: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-        return db.Client.findAll()
-          .catch(error => {
-            logger.error('error to get all clients', { error });
-            throw error;
-          });
-      },
-      client: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-        return db.Client.findOne({
-          where: {
-            id: args.id
-          },
-          limit: 1
-        }).catch(error => {
-          logger.error('error to get client', { error });
+  Query: {
+    clients: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+      return db.Client.findAll()
+        .catch(error => {
+          logger.error('error to get all clients', { error });
           throw error;
         });
-      }
     },
-    Mutation: {
-      createClient: (parent, { input }: { input: CreateClientInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-        logger.info('create client input', { input });
-        return db.Client.create({
-          name: input.name
-        }).catch(error => {
-          logger.error('error to create a new client', { error });
-          throw error;
-        });
-      }
+    client: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+      return db.Client.findOne({
+        where: {
+          id: args.id
+        },
+        limit: 1
+      }).catch(error => {
+        logger.error('error to get client', { error });
+        throw error;
+      });
+    }
+  },
+  Mutation: {
+    createClient: (parent, { input }: { input: CreateClientInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+      logger.info('create client input', { input });
+
+      const name = input.name.trim();
+      if (!name) throw new Error('Nome de cliente não é válido');
+
+      return db.Client.create({
+        name
+      }).catch(error => {
+        logger.error('error to create a new client', { error });
+        throw error;
+      });
     }
   }
-;
+};
