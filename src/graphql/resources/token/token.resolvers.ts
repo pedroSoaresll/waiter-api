@@ -2,13 +2,14 @@ import { sign } from 'jsonwebtoken';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { compareStringBcrypt, JWT_SECRET } from '../../../utils/utils';
 import Logger from '../../../utils/logger';
-import { RestaurantInstance, RestaurantModel } from '../../../models/RestaurantModel';
+import { AuthTypes } from '../../../commons/enums/auth-types';
 
 const logger = Logger('GRAPHQL:TOKEN:RESOLVER');
 
 export interface CreateTokenInput {
   email: string
   password: string
+  type?: string
 }
 
 export const tokenResolvers = {
@@ -28,7 +29,8 @@ export const tokenResolvers = {
         }
 
         const payload = {
-          sub: restaurant.id
+          sub: restaurant.id,
+          loginType: !input.type ? AuthTypes.RESTAURANT : input.type
         };
 
         return {
