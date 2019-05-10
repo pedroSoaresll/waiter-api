@@ -15,7 +15,7 @@ export interface CreateTokenInput {
 export const tokenResolvers = {
   Mutation: {
     createToken: (parent, { input }: { input: CreateTokenInput }, { db }: { db: DbConnection }) => {
-      return db.Restaurant.findOne({
+      /*return db.Restaurant.findOne({
         where: { email: input.email }
       }).then(restaurant => {
         let errorMessage: string = 'Não foi localizado nenhum estabelecimento.';
@@ -36,7 +36,7 @@ export const tokenResolvers = {
         return {
           token: sign(payload, JWT_SECRET!)
         };
-      });
+      });*/
     }
   }
 };

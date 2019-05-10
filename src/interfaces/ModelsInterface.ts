@@ -6,6 +6,8 @@ import { OrderModel } from '../models/OrderModel';
 import { TableModel } from '../models/TableModel';
 import { OrderItemModel } from '../models/OrderItemModel';
 import { TableHistoryModel } from '../models/TableHistoryModel';
+import { CollaboratorModel } from '../models/CollaboratorModel';
+import { CollaboratorAccessModel } from '../models/CollaboratorAccessModel';
 
 export interface ModelsInterface {
   Client: ClientModel
@@ -16,4 +18,6 @@ export interface ModelsInterface {
   Table: TableModel
   OrderItem: OrderItemModel
   TableHistory: TableHistoryModel
+  Collaborator: CollaboratorModel
+  CollaboratorAccess: CollaboratorAccessModel
 }

@@ -4,7 +4,7 @@ import { JWT_SECRET } from '../utils/utils';
 import db from '../models';
 import { AuthTypes } from '../commons/enums/auth-types';
 import { RestaurantInstance } from '../models/RestaurantModel';
-import { EntityAuthenticated } from '../interfaces/EntityAuthenticated';
+import { EntityAuthenticated } from '../interfaces/EntityAuthenticatedInterface';
 
 export const extractJwtMiddleware = (): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {

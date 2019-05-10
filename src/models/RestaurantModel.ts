@@ -1,13 +1,11 @@
 import * as Sequelize from 'sequelize';
 import { v4 as uuid } from 'uuid';
-import { compareSync } from 'bcryptjs';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 
 export interface RestaurantAttributes {
   id?: string
   name?: string
-  email?: string
-  password?: string
+  displayName?: string
   createdAt?: Date
   updatedAt?: Date
 }
@@ -26,25 +24,17 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     },
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
-    email: {
+    displayName: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
   }, {
     tableName: 'restaurants',
     timestamps: true,
   });
-
-  Restaurant.prototype.isPassword = (passwordReceived: string, passwordStored: string): boolean => {
-    if (!passwordReceived || !passwordStored) return false;
-    return compareSync(passwordReceived, passwordStored);
-  };
 
   return Restaurant;
 }
