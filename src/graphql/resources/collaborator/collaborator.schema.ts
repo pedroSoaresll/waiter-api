@@ -5,6 +5,7 @@ const collaboratorTypes = `
     name: String!
     email: String!
     password: String!
+    collaboratorsAccess: [CollaboratorAccess!]!
     createdAt: String!
     updatedAt: String!
   }

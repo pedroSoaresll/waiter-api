@@ -4,6 +4,7 @@ const tokenTypes = `
   }
   
   input CreateTokenInput {
+    restaurantName: String!
     email: String!
     password: String!
   }

@@ -3,12 +3,14 @@ import { v4 as uuid } from 'uuid';
 import { compareSync } from 'bcryptjs';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
+import { CollaboratorAccessAttributes } from './CollaboratorAccessModel';
 
 export interface CollaboratorAttributes {
   id?: string
   name?: string
   email?: string
   password?: string
+  collaboratorsAccess?: [CollaboratorAccessAttributes]
   createdAt?: Date
   updatedAt?: Date
 }
@@ -53,7 +55,8 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     Collaborator.hasMany(models.CollaboratorAccess, {
       foreignKey: {
         allowNull: true,
-      }
+      },
+      as: 'collaboratorsAccess'
     })
   };
 
