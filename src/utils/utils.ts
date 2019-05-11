@@ -1,5 +1,5 @@
 import { Server } from 'http';
-import { compareSync } from 'bcryptjs';
+import { compareSync, genSaltSync, hashSync } from 'bcryptjs';
 
 export const normalizePort = (val: number | string): number | string | boolean => {
   let port: number = ( typeof val === 'string' ) ? parseInt(val) : val;
@@ -42,3 +42,9 @@ export const compareStringBcrypt = (passwordReceived: string, passwordStored: st
   if (!passwordReceived || !passwordStored) return false;
   return compareSync(passwordReceived, passwordStored);
 };
+
+export const generatePassword = (password) => {
+  const saltRounds = 10;
+  const saltGenerated = genSaltSync(saltRounds);
+  return hashSync(password, saltGenerated);
+}

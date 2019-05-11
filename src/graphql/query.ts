@@ -6,6 +6,8 @@ import { orderItemQueries } from './resources/orderItem/orderItem.schema'
 import { restaurantQueries } from './resources/restaurant/restaurant.schema'
 import { tableQueries } from './resources/table/table.schema'
 import { tableHistoryQueries } from './resources/tableHistory/tableHistory.schema'
+import { collaboratorAccessQueries } from './resources/collaboratorAccess/collaboratorAccess.schema';
+import { collaboratorQueries } from './resources/collaborator/collaborator.schema';
 
 const Query = `
   type Query {
@@ -17,6 +19,8 @@ const Query = `
     ${ restaurantQueries }
     ${ tableQueries }
     ${ tableHistoryQueries }
+    ${ collaboratorAccessQueries }
+    ${ collaboratorQueries }
   }
 `;
 

@@ -3,14 +3,15 @@ const restaurantTypes = `
   type Restaurant {
     id: ID!
     name: String!
-    email: String!
-    password: String!
+    displayName: String!
+    collaboratorsAccess: [CollaboratorAccess!]!
     createdAt: String!
     updatedAt: String!
   }
   
   input CreateRestaurantInput {
-    name: String!
+    displayName: String!
+    collaboratorName: String!
     email: String!
     password: String!
   }

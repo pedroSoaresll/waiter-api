@@ -1,11 +1,14 @@
 import * as Sequelize from 'sequelize';
 import { v4 as uuid } from 'uuid';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
+import { ModelsInterface } from '../interfaces/ModelsInterface';
+import { CollaboratorAccessAttributes } from './CollaboratorAccessModel';
 
 export interface RestaurantAttributes {
   id?: string
   name?: string
   displayName?: string
+  collaboratorsAccess?: CollaboratorAccessAttributes
   createdAt?: Date
   updatedAt?: Date
 }
@@ -34,7 +37,20 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
   }, {
     tableName: 'restaurants',
     timestamps: true,
+    name: {
+      plural: 'restaurants',
+      singular: 'restaurant'
+    }
   });
+
+  Restaurant.associate = (models: ModelsInterface) => {
+    Restaurant.hasMany(models.CollaboratorAccess, {
+      foreignKey: {
+        allowNull: true,
+      },
+      as: 'collaboratorsAccess'
+    })
+  };
 
   return Restaurant;
 }

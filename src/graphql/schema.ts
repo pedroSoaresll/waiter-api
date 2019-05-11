@@ -14,6 +14,8 @@ import { clientResolvers } from './resources/client/client.resolvers';
 import { tokenTypes } from './resources/token/token.schema';
 import { tokenResolvers } from './resources/token/token.resolvers';
 import { restaurantResolvers } from './resources/restaurant/restaurant.resolvers';
+import { collaboratorTypes } from './resources/collaborator/collaborator.schema';
+import { collaboratorAccessTypes } from './resources/collaboratorAccess/collaboratorAccess.schema';
 
 const resolvers = mergeWith(
   clientResolvers,
@@ -35,13 +37,15 @@ export default makeExecutableSchema({
     Query,
     categoryTypes,
     clientTypes,
+    collaboratorAccessTypes,
+    collaboratorTypes,
     itemTypes,
     orderTypes,
     orderItemTypes,
     restaurantTypes,
     tableTypes,
     tableHistoryTypes,
-    tokenTypes,
+    tokenTypes
   ],
   resolvers,
 });

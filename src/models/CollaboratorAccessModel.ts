@@ -5,12 +5,12 @@ import { RestaurantAttributes } from './RestaurantModel';
 import { CollaboratorAttributes } from './CollaboratorModel';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 
-enum CollaboratorAccessTypeEnum {
+export enum CollaboratorAccessTypeEnum {
   ADMIN = 'ADMIN',
   COMMON = 'COMMON',
 }
 
-enum CollaboratorAccessStatusEnum {
+export enum CollaboratorAccessStatusEnum {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE'
 }
@@ -53,22 +53,24 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     }
   }, {
     tableName: 'collaborators_access',
-    timestamps: true,
+    timestamps: true
   });
 
   CollaboratorAccess.associate = (models: ModelsInterface): void => {
     CollaboratorAccess.belongsTo(models.Restaurant, {
       foreignKey: {
-        allowNull: false,
+        allowNull: true,
         field: 'restaurant'
-      }
+      },
+      as: 'restaurant'
     });
 
     CollaboratorAccess.belongsTo(models.Collaborator, {
       foreignKey: {
-        allowNull: false,
+        allowNull: true,
         field: 'collaborator'
-      }
+      },
+      as: 'collaborator'
     });
   };
 

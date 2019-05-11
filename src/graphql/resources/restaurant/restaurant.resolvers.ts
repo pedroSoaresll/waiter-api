@@ -1,18 +1,15 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { CollaboratorAccessStatusEnum, CollaboratorAccessTypeEnum } from '../../../models/CollaboratorAccessModel';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
-import { sign } from 'jsonwebtoken';
-import { isEmail } from 'validator';
 import Logger from '../../../utils/logger';
-import { JWT_SECRET } from '../../../utils/utils';
-import { info } from 'winston';
-import { genSalt, genSaltSync, hashSync } from 'bcryptjs';
+import { generatePassword } from '../../../utils/utils';
 
 const logger = Logger('GRAPHQL:RESTAURANT:RESOLVER');
 
 
 export interface CreateRestaurantInput {
-  name: string
   displayName: string
+  collaboratorName: string
   email: string
   password: string
 }
@@ -27,29 +24,59 @@ export const restaurantResolvers = {
     }
   },
   Mutation: {
-    createRestaurant: (parent, { input }: { input: CreateRestaurantInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+    createRestaurant: async (parent, { input }: { input: CreateRestaurantInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
       logger.info('create restaurant input', { input });
 
-      const name = input.name.trim();
-      if (!name) throw new Error('Nome do restaurante não é válido');
+      try {
+        // get restaurant's name
+        const name = input.displayName
+          .replace(' ', '-')
+          .toLowerCase()
+          .trim();
 
-      const saltRounds = 10;
-      const myPlaintextPassword = 's0/\/\P4$$w0rD';
-      const someOtherPlaintextPassword = 'not_bacon';
-      const saltGenerated = genSaltSync(saltRounds);
-      const passwordEncrypted = hashSync(input.password, saltGenerated);
+        // generate password
+        const password = generatePassword(input.password);
 
-      if (!isEmail(input.email))
-        throw new Error('E-email informado não é válido');
+        // create restaurant + collaborator + collaborator access
+        const restaurant = await db.Restaurant.create({
+          displayName: input.displayName,
+          name,
+          collaboratorsAccess: {
+            accessType: CollaboratorAccessTypeEnum.ADMIN,
+            status: CollaboratorAccessStatusEnum.ACTIVE,
+            inActivity: false,
+            collaborator: {
+              name: input.collaboratorName,
+              email: input.email,
+              password
+            }
+          }
+        }, {
+          include: [
+            {
+              model: db.CollaboratorAccess,
+              as: 'collaboratorsAccess',
+              include: [
+                {
+                  model: db.Collaborator,
+                  as: 'collaborator'
+                }
+              ]
+            }
+          ]
+        });
 
-      return db.Restaurant.create({
-        name,
-        email: input.email,
-        password: passwordEncrypted
-      }).catch(error => {
-        logger.error('error to create a new estabelecimento', { error });
-        throw new Error('Houve um problema ao tentar criar um novo estabelecimento');
-      });
+        if (!restaurant)
+          throw new Error('Error to create CollaboratorAccess + Restaurant + Collaborator: ');
+
+        logger.info('Data created', { collaboratorAccess: restaurant });
+
+        return restaurant;
+
+      } catch (e) {
+        logger.error('Error in createRestaurant mutation: ', { e });
+        throw e;
+      }
     }
   }
 };

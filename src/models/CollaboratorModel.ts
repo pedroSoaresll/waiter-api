@@ -2,6 +2,7 @@ import * as Sequelize from 'sequelize';
 import { v4 as uuid } from 'uuid';
 import { compareSync } from 'bcryptjs';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
+import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface CollaboratorAttributes {
   id?: string
@@ -42,7 +43,19 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
   }, {
     tableName: 'collaborators',
     timestamps: true,
+    name: {
+      plural: 'collaborators',
+      singular: 'collaborator'
+    }
   });
+
+  Collaborator.associate = (models: ModelsInterface) => {
+    Collaborator.hasMany(models.CollaboratorAccess, {
+      foreignKey: {
+        allowNull: true,
+      }
+    })
+  };
 
   Collaborator.prototype.isPassword = (passwordReceived: string, passwordStored: string): boolean => {
     if (!passwordReceived || !passwordStored) return false;
