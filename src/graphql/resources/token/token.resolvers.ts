@@ -21,6 +21,7 @@ export const tokenResolvers = {
         where: {
           email: input.email
         },
+        attributes: ['id', 'password'],
         include: [
           {
             model: db.CollaboratorAccess,
