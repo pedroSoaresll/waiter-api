@@ -7,6 +7,7 @@ import { compose } from '../../../composables/composable.resolver';
 import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
 import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
+import { RestaurantStatusEnum } from '../../../models/RestaurantModel';
 
 const logger = Logger('GRAPHQL:RESTAURANT:RESOLVER');
 
@@ -45,6 +46,7 @@ export const restaurantResolvers = {
         const restaurant = await db.Restaurant.create({
           displayName: input.displayName,
           name,
+          status: RestaurantStatusEnum.ACTIVE,
           collaboratorsAccess: {
             accessType: CollaboratorAccessTypeEnum.ADMIN,
             status: CollaboratorAccessStatusEnum.ACTIVE,
