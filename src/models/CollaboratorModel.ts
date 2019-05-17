@@ -5,11 +5,17 @@ import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { CollaboratorAccessAttributes } from './CollaboratorAccessModel';
 
+export enum CollaboratorStatusEnum {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
+}
+
 export interface CollaboratorAttributes {
   id?: string
   name?: string
   email?: string
   password?: string
+  status?: CollaboratorStatusEnum
   collaboratorsAccess?: [CollaboratorAccessAttributes]
   createdAt?: Date
   updatedAt?: Date
@@ -41,7 +47,11 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.STRING,
       allowNull: false,
     },
-
+    status: {
+      type: DataTypes.ENUM([CollaboratorStatusEnum.ACTIVE, CollaboratorStatusEnum.INACTIVE]),
+      allowNull: false,
+      defaultValue: CollaboratorStatusEnum.ACTIVE
+    }
   }, {
     tableName: 'collaborators',
     timestamps: true,
@@ -57,7 +67,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
         allowNull: true,
       },
       as: 'collaboratorsAccess'
-    })
+    });
   };
 
   Collaborator.prototype.isPassword = (passwordReceived: string, passwordStored: string): boolean => {

@@ -4,11 +4,17 @@ import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { CollaboratorAccessAttributes } from './CollaboratorAccessModel';
 
+export enum RestaurantStatusEnum {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
+}
+
 export interface RestaurantAttributes {
   id?: string
   name?: string
   displayName?: string
   collaboratorsAccess?: CollaboratorAccessAttributes
+  status?: RestaurantStatusEnum
   createdAt?: Date
   updatedAt?: Date
 }
@@ -34,6 +40,11 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.STRING,
       allowNull: false,
     },
+    status: {
+      type: DataTypes.ENUM([RestaurantStatusEnum.ACTIVE, RestaurantStatusEnum.INACTIVE]),
+      allowNull: false,
+      defaultValue: RestaurantStatusEnum.ACTIVE
+    }
   }, {
     tableName: 'restaurants',
     timestamps: true,

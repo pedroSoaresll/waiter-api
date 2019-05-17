@@ -3,6 +3,10 @@ import { CollaboratorAccessStatusEnum, CollaboratorAccessTypeEnum } from '../../
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import Logger from '../../../utils/logger';
 import { generatePassword } from '../../../utils/utils';
+import { compose } from '../../../composables/composable.resolver';
+import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
+import { authResolver } from '../../../composables/auth.resolver';
+import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
 
 const logger = Logger('GRAPHQL:RESTAURANT:RESOLVER');
 
@@ -16,12 +20,12 @@ export interface CreateRestaurantInput {
 
 export const restaurantResolvers = {
   Query: {
-    restaurants: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-      return db.Restaurant.findAll().catch(error => {
+    restaurants: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, args, { db }, info: GraphQLResolveInfo) => {
+      return db!.Restaurant.findAll().catch(error => {
         logger.error('error to create a new estabelecimento', { error });
         throw new Error('Houve um problema ao tentar buscar os estabelecimentos');
       });
-    }
+    })
   },
   Mutation: {
     createRestaurant: async (parent, { input }: { input: CreateRestaurantInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
@@ -30,7 +34,7 @@ export const restaurantResolvers = {
       try {
         // get restaurant's name
         const name = input.displayName
-          .replace(' ', '-')
+          .replace(/\s+/g, '-')
           .toLowerCase()
           .trim();
 

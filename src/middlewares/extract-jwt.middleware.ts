@@ -2,9 +2,8 @@ import { NextFunction, Request, RequestHandler, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../utils/utils';
 import db from '../models';
-import { AuthTypes } from '../commons/enums/auth-types';
-import { RestaurantInstance } from '../models/RestaurantModel';
 import { EntityAuthenticated } from '../interfaces/EntityAuthenticatedInterface';
+import { CollaboratorInstance } from '../models/CollaboratorModel';
 
 export const extractJwtMiddleware = (): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -19,21 +18,20 @@ export const extractJwtMiddleware = (): RequestHandler => {
     jwt.verify(token, JWT_SECRET!, (err, decoded: any): void => {
       if (err) return next();
 
-      if (decoded.type === AuthTypes.RESTAURANT) {
-        db.Restaurant.findById(decoded.sub, {
-          attributes: ['id', 'email']
-        })
-          .then((result: RestaurantInstance | null) => {
-            if (result) {
-              req['context']['entityAuthenticated'] = <EntityAuthenticated>{
-                id: result.get('id'),
-                email: result.get('email')
-              };
-            }
 
-            return next();
-          });
-      }
+      db.Collaborator.findById(decoded.sub, {
+        attributes: ['id', 'email']
+      })
+        .then((result: CollaboratorInstance | null) => {
+          if (result) {
+            req['context']['entityAuthenticated'] = <EntityAuthenticated>{
+              id: result.get('id'),
+              email: result.get('email')
+            };
+          }
+
+          return next();
+        });
     });
   };
 };
