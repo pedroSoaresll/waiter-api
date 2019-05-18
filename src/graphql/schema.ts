@@ -16,11 +16,15 @@ import { tokenResolvers } from './resources/token/token.resolvers';
 import { restaurantResolvers } from './resources/restaurant/restaurant.resolvers';
 import { collaboratorTypes } from './resources/collaborator/collaborator.schema';
 import { collaboratorAccessTypes } from './resources/collaboratorAccess/collaboratorAccess.schema';
+import { collaboratorAccessResolver } from './resources/collaboratorAccess/collaboratorAccess.resolvers';
+import { collaboratorResolver } from './resources/collaborator/collaborator.resolvers';
 
 const resolvers = mergeWith(
   clientResolvers,
   tokenResolvers,
-  restaurantResolvers
+  restaurantResolvers,
+  collaboratorAccessResolver,
+  collaboratorResolver
 );
 
 const SchemaDefinition = `
