@@ -40,6 +40,7 @@
     "express": "4.16.2",
     "express-graphql": "0.6.11",
     "graphql": "14.0.2",
+    "graphql-fields": "^2.0.3",
     "graphql-tools": "2.3.0",
     "jsonwebtoken": "8.1.0",
     "lodash": "^4.17.11",
