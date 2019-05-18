@@ -5,6 +5,8 @@ import { RestaurantInstance } from '../models/RestaurantModel';
 import { RestaurantLoader } from './RestaurantLoader';
 import { CollaboratorAccessInstance } from '../models/CollaboratorAccessModel';
 import { CollaboratorAccessLoader } from './CollaboratorAccessLoader';
+import { CollaboratorInstance } from '../models/CollaboratorModel';
+import { CollaboratorLoader } from './CollaboratorLoader';
 
 export class DataLoaderFactory {
   constructor(private db: DbConnection) {
@@ -20,6 +22,12 @@ export class DataLoaderFactory {
       ),
       collaboratorAccessCollaboratorLoader: new DataLoader<string, CollaboratorAccessInstance>(
         (ids: string[]) => CollaboratorAccessLoader.batchCollaboratorAccessCollaborator(this.db.CollaboratorAccess, ids)
+      ),
+      collaboratorAccessRestaurantLoader: new DataLoader<string, CollaboratorAccessInstance>(
+        (ids: string[]) => CollaboratorAccessLoader.batchCollaboratorAccessRestaurant(this.db.CollaboratorAccess, ids)
+      ),
+      collaboratorLoader: new DataLoader<string, CollaboratorInstance>(
+        (ids: string[]) => CollaboratorLoader.bathCollaborators(this.db.Collaborator, ids)
       )
     };
   }

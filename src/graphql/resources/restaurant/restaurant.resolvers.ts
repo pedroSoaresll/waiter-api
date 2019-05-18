@@ -8,6 +8,7 @@ import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
 import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
 import { RestaurantStatusEnum } from '../../../models/RestaurantModel';
+import { DataLoaders } from '../../../interfaces/DataLoadersInterface';
 
 const logger = Logger('GRAPHQL:RESTAURANT:RESOLVER');
 
@@ -20,6 +21,11 @@ export interface CreateRestaurantInput {
 }
 
 export const restaurantResolvers = {
+  Restaurant: {
+    collaboratorsAccess: (restaurant, args, { dataLoaders: { collaboratorAccessRestaurantLoader } }: { dataLoaders: DataLoaders }) => {
+      return collaboratorAccessRestaurantLoader.loadMany([restaurant.id])
+    }
+  },
   Query: {
     restaurants: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, args, { db }, info: GraphQLResolveInfo) => {
       return db!.Restaurant.findAll().catch(error => {

@@ -22,6 +22,18 @@ export class CollaboratorAccessLoader {
           }
         }
       })
-    )
+    );
+  }
+
+  static batchCollaboratorAccessRestaurant(collaboratorAccess: CollaboratorAccessModel, restaurantIds: string[]): Promise<CollaboratorAccessInstance[]> {
+    return Promise.resolve<CollaboratorAccessInstance[]>(
+      collaboratorAccess.findAll({
+        where: {
+          restaurant: {
+            $in: restaurantIds
+          }
+        }
+      })
+    );
   }
 }
