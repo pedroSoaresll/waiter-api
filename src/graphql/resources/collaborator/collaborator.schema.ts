@@ -18,7 +18,7 @@ const collaboratorTypes = `
 `;
 
 const collaboratorQueries = `
-  collaborators: [Collaborator!]!
+  collaborators(first: Int, offset: Int): [Collaborator!]!
 `;
 
 const collaboratorMutations = `

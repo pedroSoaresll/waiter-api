@@ -6,6 +6,11 @@ import { RequestedFields } from '../../../ast/RequestedFields';
 
 const logger = Logger('CollaboratorResolver');
 
+export interface CollaboratorsInput {
+  first: number
+  offset: number
+}
+
 export const collaboratorResolver = {
   Collaborator: {
     collaboratorsAccess: (collaborator, args, { dataLoaders: { collaboratorAccessCollaboratorLoader } }: { dataLoaders: DataLoaders }, info: GraphQLResolveInfo) => {
@@ -13,8 +18,10 @@ export const collaboratorResolver = {
     }
   },
   Query: {
-    collaborators: (parent, args, { db, requestedFields }: { db: DbConnection, requestedFields: RequestedFields }, info: GraphQLResolveInfo) => {
+    collaborators: (parent, { first = 0, offset = 0 }: CollaboratorsInput, { db, requestedFields }: { db: DbConnection, requestedFields: RequestedFields }, info: GraphQLResolveInfo) => {
       return db.Collaborator.findAll({
+        limit: first,
+        offset,
         attributes: requestedFields.getFields(info, { keep: ['id'], exclude: ['collaboratorsAccess'] })
       }).catch(error => {
         logger.error('Error to find collaborators', { error });
