@@ -10,6 +10,12 @@ const clientTypes = `
   input CreateClientInput {
     name: String!
   }
+  
+  input InitSessionInput {
+    name: String!
+    restaurant: String!
+    table: String!
+  }
 `;
 
 const clientQueries = `
@@ -19,6 +25,7 @@ const clientQueries = `
 
 const clientMutations = `
   createClient(input: CreateClientInput!): Client!
+  initSession(input: InitSessionInput!): Order
 `;
 
 export { clientTypes, clientQueries, clientMutations }

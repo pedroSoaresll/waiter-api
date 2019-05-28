@@ -8,6 +8,12 @@ interface CreateClientInput {
   name: string
 }
 
+interface InitSessionInput {
+  name: string
+  restaurant: string
+  table: string
+}
+
 export const clientResolvers = {
   Query: {
     clients: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
@@ -42,6 +48,11 @@ export const clientResolvers = {
         logger.error('error to create a new client', { error });
         throw error;
       });
+    },
+    initSession: (parent, { input }: { input: InitSessionInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+      // todo create client
+      // todo create restaurant
+      // todo create order and set client + restaurant + table
     }
   }
 };
