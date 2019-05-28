@@ -65,12 +65,19 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       }
     });
 
+    Order.belongsTo(models.Table, {
+      foreignKey: {
+        allowNull: false,
+        name: 'table'
+      }
+    });
+
     Order.belongsTo(models.Client, {
       foreignKey: {
         allowNull: false,
         field: 'client'
       }
-    })
+    });
   };
 
   return Order;
