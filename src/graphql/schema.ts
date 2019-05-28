@@ -18,13 +18,15 @@ import { collaboratorTypes } from './resources/collaborator/collaborator.schema'
 import { collaboratorAccessTypes } from './resources/collaboratorAccess/collaboratorAccess.schema';
 import { collaboratorAccessResolver } from './resources/collaboratorAccess/collaboratorAccess.resolvers';
 import { collaboratorResolver } from './resources/collaborator/collaborator.resolvers';
+import { tableResolvers } from './resources/table/table.resolver';
 
 const resolvers = mergeWith(
   clientResolvers,
   tokenResolvers,
   restaurantResolvers,
   collaboratorAccessResolver,
-  collaboratorResolver
+  collaboratorResolver,
+  tableResolvers
 );
 
 const SchemaDefinition = `
