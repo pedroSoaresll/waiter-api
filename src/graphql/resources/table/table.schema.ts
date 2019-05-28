@@ -10,14 +10,24 @@ const tableTypes = `
     updatedAt: String!
   }
   
+  input CreateTableInput {
+    restaurant: ID!
+    name: String!
+    status: TableStatusEnum
+  }
+  
   enum TableStatusEnum {
     INACTIVE
     ACTIVE
   }
 `;
 
-const tableQueries = ``;
+const tableQueries = `
+  tables: [Table]
+`;
 
-const tableMutations = ``;
+const tableMutations = `
+  createTable(input: CreateTableInput!): Table
+`;
 
 export { tableTypes, tableQueries, tableMutations }
