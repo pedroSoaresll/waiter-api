@@ -1,17 +1,18 @@
 import * as Sequelize from 'sequelize';
 import { v4 as uuid } from 'uuid';
-import { RestaurantAttributes } from './RestaurantModel';
+import * as qrcode from 'qrcode';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface TableAttributes {
-  id: string
-  restaurant: RestaurantAttributes
-  name: string
-  qrcode: string
-  status: TableStatusEnum
-  createdAt: string
-  updatedAt: string
+  id?: string
+  // restaurant?: RestaurantAttributes
+  restaurant?: string
+  name?: string
+  qrcode?: string
+  status?: TableStatusEnum
+  createdAt?: string
+  updatedAt?: string
 }
 
 export enum TableStatusEnum {
@@ -24,20 +25,33 @@ export interface TableInstance extends Sequelize.Instance<TableAttributes>, Tabl
 export interface TableModel extends BaseModelInterface, Sequelize.Model<TableInstance, TableAttributes> {}
 
 export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): TableModel => {
+  const uuidGenerated = uuid();
+  const getQrCode = () => {
+    let result = null;
+    qrcode.toDataURL(uuidGenerated, (err, rt) => {
+      result = rt;
+    });
+
+    return function () {
+      return result;
+    };
+  };
+
   const Table: TableModel = sequelize.define('Table', {
     id: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: uuid()
+      defaultValue: uuidGenerated
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     qrcode: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: getQrCode()
     },
     status: {
       type: DataTypes.ENUM(['INACTIVE', 'ACTIVE']),
@@ -53,7 +67,8 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       foreignKey: {
         allowNull: false,
         field: 'restaurant'
-      }
+      },
+      as: 'restaurant'
     });
   };
 
