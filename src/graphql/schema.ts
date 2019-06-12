@@ -19,6 +19,7 @@ import { collaboratorAccessTypes } from './resources/collaboratorAccess/collabor
 import { collaboratorAccessResolver } from './resources/collaboratorAccess/collaboratorAccess.resolvers';
 import { collaboratorResolver } from './resources/collaborator/collaborator.resolvers';
 import { tableResolvers } from './resources/table/table.resolver';
+import { categoryResolver } from './resources/category/category.resolvers';
 
 const resolvers = mergeWith(
   clientResolvers,
@@ -26,8 +27,10 @@ const resolvers = mergeWith(
   restaurantResolvers,
   collaboratorAccessResolver,
   collaboratorResolver,
-  tableResolvers
-);
+  tableResolvers,
+  categoryResolver
+  )
+;
 
 const SchemaDefinition = `
   type Schema {

@@ -15,6 +15,12 @@ export interface CreateTokenInput {
   type?: string
 }
 
+export interface TokenInfo {
+  sub: string
+  restaurantId: string
+  loginType: string
+}
+
 export const tokenResolvers = {
   Mutation: {
     createToken: async (parent, { input }: { input: CreateTokenInput }, { db }: { db: DbConnection }) => {
@@ -55,7 +61,7 @@ export const tokenResolvers = {
           if (!collaborator.collaboratorsAccess!.length)
             throw new Error('Your user do not have access in some establishment or establishment is not active');
 
-          const payload = {
+          const payload = <TokenInfo>{
             sub: collaborator.id,
             restaurantId: collaborator.collaboratorsAccess![0].restaurant!.id,
             loginType: collaborator.collaboratorsAccess![0].accessType

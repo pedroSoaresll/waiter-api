@@ -23,11 +23,11 @@ export interface CreateRestaurantInput {
 export const restaurantResolvers = {
   Restaurant: {
     collaboratorsAccess: (restaurant, args, { dataLoaders: { collaboratorAccessRestaurantLoader } }: { dataLoaders: DataLoaders }) => {
-      return collaboratorAccessRestaurantLoader.loadMany([restaurant.id])
+      return collaboratorAccessRestaurantLoader.loadMany([restaurant.id]);
     }
   },
   Query: {
-    restaurants: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, args, { db }, info: GraphQLResolveInfo) => {
+    restaurants: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, args, { db }: ResolverContext, info: GraphQLResolveInfo) => {
       return db!.Restaurant.findAll().catch(error => {
         logger.error('error to create a new estabelecimento', { error });
         throw new Error('Houve um problema ao tentar buscar os estabelecimentos');
