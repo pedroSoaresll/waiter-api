@@ -3,15 +3,22 @@ const tokenTypes = `
     token: String!
   }
   
-  input CreateTokenInput {
+  input CreateTokenToCollaboratorInput {
     restaurantName: String!
     email: String!
     password: String!
   }
+  
+  input CreateTokenToClientInput {
+    restaurantId: ID!
+    tableId: ID!
+    clientName: String!
+  }
 `;
 
 const tokenMutation = `
-  createToken(input: CreateTokenInput!): Token
+  createTokenToCollaborator(input: CreateTokenToCollaboratorInput!): Token
+  createTokenToClient(input: CreateTokenToClientInput!): Token
 `;
 
 export { tokenTypes, tokenMutation };

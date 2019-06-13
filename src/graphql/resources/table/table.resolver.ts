@@ -23,5 +23,14 @@ export const tableResolvers = {
         status: status || TableStatusEnum.ACTIVE
       });
     }
+  },
+  Table: {
+    restaurant: (table, args, {db}: {db: DbConnection}, info) => {
+      return db.Restaurant.find({
+        where: {
+          id: table.restaurantId
+        }
+      })
+    }
   }
 };

@@ -66,7 +66,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     Table.belongsTo(models.Restaurant, {
       foreignKey: {
         allowNull: false,
-        field: 'restaurant'
+        field: 'restaurant',
       },
       as: 'restaurant'
     });

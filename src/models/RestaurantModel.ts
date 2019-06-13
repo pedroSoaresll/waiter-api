@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { CollaboratorAccessAttributes } from './CollaboratorAccessModel';
+import {TableAttributes} from "./TableModel";
 
 export enum RestaurantStatusEnum {
   ACTIVE = 'ACTIVE',
@@ -17,6 +18,7 @@ export interface RestaurantAttributes {
   status?: RestaurantStatusEnum
   createdAt?: Date
   updatedAt?: Date
+  tables?: [TableAttributes]
 }
 
 export interface RestaurantInstance extends Sequelize.Instance<RestaurantAttributes>, RestaurantAttributes {}
@@ -60,6 +62,14 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
         allowNull: true,
       },
       as: 'collaboratorsAccess'
+    })
+
+    Restaurant.hasMany(models.Table, {
+      foreignKey: {
+        allowNull: true,
+        field: 'restaurant'
+      },
+      as: 'tables'
     })
   };
 
