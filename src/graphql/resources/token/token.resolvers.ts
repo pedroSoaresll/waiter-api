@@ -1,12 +1,12 @@
-import {sign} from 'jsonwebtoken';
-import {DbConnection} from '../../../interfaces/DbConnectionInterface';
-import {compareStringBcrypt, JWT_SECRET} from '../../../utils/utils';
+import { sign } from 'jsonwebtoken';
+import { DbConnection } from '../../../interfaces/DbConnectionInterface';
+import { compareStringBcrypt, JWT_SECRET } from '../../../utils/utils';
 import Logger from '../../../utils/logger';
-import {AuthTypes} from '../../../commons/enums/auth-types';
-import CollaboratorModel, {CollaboratorStatusEnum} from '../../../models/CollaboratorModel';
-import {RestaurantAttributes, RestaurantStatusEnum} from '../../../models/RestaurantModel';
-import {TableStatusEnum} from "../../../models/TableModel";
-import {GraphQLResolveInfo} from "graphql";
+import { AuthTypes } from '../../../commons/enums/auth-types';
+import CollaboratorModel, { CollaboratorStatusEnum } from '../../../models/CollaboratorModel';
+import { RestaurantAttributes, RestaurantStatusEnum } from '../../../models/RestaurantModel';
+import { TableStatusEnum } from '../../../models/TableModel';
+import { GraphQLResolveInfo } from 'graphql';
 
 const logger = Logger('GRAPHQL:TOKEN:RESOLVER');
 
@@ -29,9 +29,13 @@ export interface TokenInfo {
   loginType: string
 }
 
+export interface ClientTokenInfo extends TokenInfo {
+  tableId: string
+}
+
 export const tokenResolvers = {
   Mutation: {
-    createTokenToCollaborator: async (parent, {input}: { input: CreateTokenToCollaboratorInput }, {db}: { db: DbConnection }) => {
+    createTokenToCollaborator: async (parent, { input }: { input: CreateTokenToCollaboratorInput }, { db }: { db: DbConnection }) => {
       return db.Collaborator.findOne({
         where: {
           email: input.email,
@@ -80,11 +84,11 @@ export const tokenResolvers = {
           };
         })
         .catch(error => {
-          logger.error('error to generate a token: ', {error});
+          logger.error('error to generate a token: ', { error });
           throw error;
         });
     },
-    createTokenToClient: async (parent, {input}: { input: CreateTokenToClientInput}, {db}: {db: DbConnection }) => {
+    createTokenToClient: async (parent, { input }: { input: CreateTokenToClientInput }, { db }: { db: DbConnection }) => {
       // verificar se o restaurante existe
       // verificar se a mesa do restaurante existe
       // inserir este cliente na lista
@@ -107,9 +111,26 @@ export const tokenResolvers = {
         ]
       });
 
-      console.log('resultado da consulta', result!.id);
-      console.log('resultado da consulta tables', result!.tables);
-      return null;
+      if (!result)
+        throw new Error('Restaurant or table not found');
+
+      const client = await db.Client.create({
+        name: input.clientName
+      });
+
+      if (!client)
+        throw new Error('Error to create user');
+
+      const payload = <ClientTokenInfo>{
+        sub: client.id,
+        restaurantId: result!.id,
+        tableId: result!.tables![0].id,
+        loginType: 'CLIENT'
+      };
+
+      return {
+        token: sign(payload, JWT_SECRET!),
+      };
     }
   }
 };
