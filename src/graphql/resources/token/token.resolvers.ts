@@ -89,10 +89,6 @@ export const tokenResolvers = {
         });
     },
     createTokenToClient: async (parent, { input }: { input: CreateTokenToClientInput }, { db }: { db: DbConnection }) => {
-      // verificar se o restaurante existe
-      // verificar se a mesa do restaurante existe
-      // inserir este cliente na lista
-      // criar token -> id do restaurante, id da mesa, id do cliente
       const result = await db.Restaurant.find<RestaurantAttributes>({
         where: {
           id: input.restaurantId,

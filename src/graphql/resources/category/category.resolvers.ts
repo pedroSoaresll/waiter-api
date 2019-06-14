@@ -3,6 +3,9 @@ import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { compose } from '../../../composables/composable.resolver';
 import { authResolver } from '../../../composables/auth.resolver';
 import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
+import { DbConnection } from '../../../interfaces/DbConnectionInterface';
+import { DataLoaders } from '../../../interfaces/DataLoadersInterface';
+import { CategoryAttributes, CategoryStatusEnum } from '../../../models/CategoryModel';
 
 interface CreateCategoryInput {
   restaurant: string
@@ -16,15 +19,26 @@ export const categoryResolver = {
       console.log('entityAuthenticated', entityAuthenticated);
       return db!.Category.findAll({
         where: {
-          restaurant: entityAuthenticated!.restaurant
+          restaurantId: entityAuthenticated!.restaurant
         }
       });
     })
   },
   Mutation: {
-    createCategory: (parent, args: CreateCategoryInput, { db, tokenInfo }: ResolverContext, info: GraphQLResolveInfo) => {
-      console.log(tokenInfo);
-      throw new Error('not implemented yet');
+    createCategory: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, { input }, { db, entityAuthenticated }: ResolverContext, info: GraphQLResolveInfo) => {
+      const { name, icon } = <CreateCategoryInput>input;
+      const { restaurant: restaurantId } = entityAuthenticated!;
+      return db!.Category.create({
+        name,
+        icon,
+        restaurantId,
+        status: CategoryStatusEnum.ACTIVE
+      });
+    })
+  },
+  Category: {
+    restaurant: (category: CategoryAttributes, args, {dataLoaders: {restaurantLoader}}: {db: DbConnection, dataLoaders: DataLoaders}) => {
+      return restaurantLoader.load(category.restaurantId!)
     }
   }
 };

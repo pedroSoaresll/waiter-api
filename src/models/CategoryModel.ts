@@ -4,12 +4,18 @@ import { v4 as uuid } from 'uuid';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface CategoryAttributes {
-  id: string
-  restaurant: string
-  name: string
+  id?: string
+  restaurantId?: string
+  name?: string
   icon?: string
-  createdAt: Date
-  updatedAt: Date
+  status?: CategoryStatusEnum
+  createdAt?: Date
+  updatedAt?: Date
+}
+
+export enum CategoryStatusEnum {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
 }
 
 export interface CategoryInstance extends Sequelize.Instance<CategoryAttributes>, CategoryAttributes {}
@@ -30,7 +36,11 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     },
     icon: {
       type: DataTypes.STRING,
+      defaultValue: null
     },
+    status: {
+      type: DataTypes.ENUM([CategoryStatusEnum.ACTIVE, CategoryStatusEnum.INACTIVE])
+    }
   }, {
     tableName: 'categories',
     timestamps: true,

@@ -10,5 +10,4 @@ export interface ResolverContext {
   entityAuthenticated?: EntityAuthenticated
   dataLoaders?: DataLoaders
   requestedFields?: RequestedFields
-  tokenInfo?: TokenInfo
 }

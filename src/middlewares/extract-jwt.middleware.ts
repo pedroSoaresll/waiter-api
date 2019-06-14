@@ -3,8 +3,9 @@ import * as jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../utils/utils';
 import db from '../models';
 import { EntityAuthenticated } from '../interfaces/EntityAuthenticatedInterface';
-import { CollaboratorInstance } from '../models/CollaboratorModel';
-import { TokenInfo } from '../graphql/resources/token/token.resolvers';
+import { CollaboratorAttributes, CollaboratorInstance } from '../models/CollaboratorModel';
+import { ClientTokenInfo, TokenInfo } from '../graphql/resources/token/token.resolvers';
+import { ClientAttributes } from '../models/ClientModel';
 
 export const extractJwtMiddleware = (): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -16,25 +17,43 @@ export const extractJwtMiddleware = (): RequestHandler => {
 
     if (!token) return next();
 
-    jwt.verify(token, JWT_SECRET!, (err, decoded: any): void => {
+    jwt.verify(token, JWT_SECRET!, async (err, decoded: any) => {
       if (err) return next();
 
-      let tokenInfo = <TokenInfo>decoded;
+      let entityAuthenticated: EntityAuthenticated;
+      let { restaurantId: restaurant, sub: id, loginType } = <TokenInfo>decoded;
 
-      db.Collaborator.findById(decoded.sub, {
-        attributes: ['id', 'email'],
-      })
-        .then((result: CollaboratorInstance | null) => {
-          if (result) {
-            req['context']['entityAuthenticated'] = <EntityAuthenticated>{
-              id: result.get('id'),
-              email: result.get('email'),
-              restaurant: tokenInfo.restaurantId
-            };
-          }
+      if (loginType === 'CLIENT') {
+        const { tableId: table } = <ClientTokenInfo>decoded;
+        const client = await db.Client.findById<ClientAttributes>(id);
 
+        if (!client)
           return next();
+
+        entityAuthenticated = <EntityAuthenticated>{
+          id,
+          loginType,
+          restaurant,
+          table,
+        };
+      } else {
+        const collaborator = await db.Collaborator.findById<CollaboratorAttributes>(id, {
+          attributes: ['id'],
         });
+
+        if (!collaborator)
+          return next();
+
+        entityAuthenticated = <EntityAuthenticated>{
+          id,
+          restaurant,
+          loginType
+        };
+      }
+
+      req['context']['entityAuthenticated'] = entityAuthenticated;
+
+      return next();
     });
   };
 };

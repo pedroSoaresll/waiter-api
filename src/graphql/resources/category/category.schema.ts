@@ -5,14 +5,19 @@ const categoryTypes = `
     restaurant: Restaurant!
     name: String!
     icon: String
+    status: CategoryStatusEnum!
     createdAt: String!
     updatedAt: String!
   }
   
   input CreateCategoryInput {
-    restaurant: String
-    name: String
+    name: String!
     icon: String
+  }
+  
+  enum CategoryStatusEnum {
+    ACTIVE
+    INACTIVE
   }
 `;
 
