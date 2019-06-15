@@ -6,6 +6,7 @@ import { verifyTokenResolver } from '../../../composables/verify-token.resolver'
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { DataLoaders } from '../../../interfaces/DataLoadersInterface';
 import { CategoryAttributes, CategoryStatusEnum } from '../../../models/CategoryModel';
+import { CollaboratorAccessTypeEnum } from '../../../models/CollaboratorAccessModel';
 
 interface CreateCategoryInput {
   restaurant: string
@@ -26,7 +27,11 @@ export const categoryResolver = {
   Mutation: {
     createCategory: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, { input }, { db, entityAuthenticated }: ResolverContext, info: GraphQLResolveInfo) => {
       const { name, icon } = <CreateCategoryInput>input;
-      const { restaurant: restaurantId } = entityAuthenticated!;
+      const { restaurant: restaurantId, loginType } = entityAuthenticated!;
+
+      if (loginType !== CollaboratorAccessTypeEnum.ADMIN)
+        throw new Error('Just ADM can create a new category');
+
       return db!.Category.create({
         name,
         icon,
@@ -36,8 +41,8 @@ export const categoryResolver = {
     })
   },
   Category: {
-    restaurant: (category: CategoryAttributes, args, {dataLoaders: {restaurantLoader}}: {db: DbConnection, dataLoaders: DataLoaders}) => {
-      return restaurantLoader.load(category.restaurantId!)
+    restaurant: (category: CategoryAttributes, args, { dataLoaders: { restaurantLoader } }: { db: DbConnection, dataLoaders: DataLoaders }) => {
+      return restaurantLoader.load(category.restaurantId!);
     }
   }
 };
