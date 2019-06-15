@@ -16,7 +16,6 @@ interface CreateCategoryInput {
 export const categoryResolver = {
   Query: {
     categories: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, args, { entityAuthenticated, db }: ResolverContext, info: GraphQLResolveInfo) => {
-      console.log('entityAuthenticated', entityAuthenticated);
       return db!.Category.findAll({
         where: {
           restaurantId: entityAuthenticated!.restaurant

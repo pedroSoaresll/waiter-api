@@ -7,6 +7,8 @@ import { CollaboratorAccessInstance } from '../models/CollaboratorAccessModel';
 import { CollaboratorAccessLoader } from './CollaboratorAccessLoader';
 import { CollaboratorInstance } from '../models/CollaboratorModel';
 import { CollaboratorLoader } from './CollaboratorLoader';
+import { CategoryLoader } from './CategoryLoader';
+import { CategoryInstance } from '../models/CategoryModel';
 
 export class DataLoaderFactory {
   constructor(private db: DbConnection) {
@@ -28,6 +30,9 @@ export class DataLoaderFactory {
       ),
       collaboratorLoader: new DataLoader<string, CollaboratorInstance>(
         (ids: string[]) => CollaboratorLoader.bathCollaborators(this.db.Collaborator, ids)
+      ),
+      categoryLoader: new DataLoader<string, CategoryInstance>(
+        (ids: string[]) => CategoryLoader.batchCategories(this.db.Category, ids)
       )
     };
   }

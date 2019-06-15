@@ -20,6 +20,7 @@ import { collaboratorAccessResolver } from './resources/collaboratorAccess/colla
 import { collaboratorResolver } from './resources/collaborator/collaborator.resolvers';
 import { tableResolvers } from './resources/table/table.resolver';
 import { categoryResolver } from './resources/category/category.resolvers';
+import { itemResolver } from './resources/item/item.resolvers';
 
 const resolvers = mergeWith(
   clientResolvers,
@@ -28,7 +29,8 @@ const resolvers = mergeWith(
   collaboratorAccessResolver,
   collaboratorResolver,
   tableResolvers,
-  categoryResolver
+  categoryResolver,
+  itemResolver
   )
 ;
 

@@ -1,19 +1,17 @@
 import * as Sequelize from 'sequelize';
 import { v4 as uuid } from 'uuid';
-import { CategoryAttributes } from './CategoryModel';
-import { RestaurantAttributes } from './RestaurantModel';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface ItemAttributes {
-  id: string
-  category: CategoryAttributes
-  restaurant: RestaurantAttributes
-  name: string
-  amount: string
-  status: ItemStatusEnum
-  createdAt: Date
-  updatedAt: Date
+  id?: string
+  categoryId?: string
+  restaurantId?: string
+  name?: string
+  amount?: number
+  status?: ItemStatusEnum
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export enum ItemStatusEnum {
@@ -23,7 +21,7 @@ export enum ItemStatusEnum {
 
 export interface ItemInstance extends Sequelize.Instance<ItemAttributes>, ItemAttributes {}
 
-export interface ItemModel extends BaseModelInterface, Sequelize.Model<ItemAttributes, ItemInstance> {}
+export interface ItemModel extends BaseModelInterface, Sequelize.Model<ItemInstance, ItemAttributes> {}
 
 export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): ItemModel => {
   const Item: ItemModel = sequelize.define('Item', {
@@ -55,14 +53,16 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       foreignKey: {
         allowNull: false,
         field: 'restaurant'
-      }
+      },
+      as: 'restaurant'
     });
 
     Item.belongsTo(models.Category, {
       foreignKey: {
         allowNull: true,
         field: 'category'
-      }
+      },
+      as: 'category'
     })
   };
 
