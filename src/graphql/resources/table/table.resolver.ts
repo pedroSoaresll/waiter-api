@@ -1,6 +1,10 @@
 import { GraphQLResolveInfo } from 'graphql';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { TableStatusEnum } from '../../../models/TableModel';
+import { compose } from '../../../composables/composable.resolver';
+import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
+import { authResolver } from '../../../composables/auth.resolver';
+import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
 
 interface CreateTableInput {
   restaurant: string
@@ -9,28 +13,41 @@ interface CreateTableInput {
 }
 
 export const tableResolvers = {
-  Query: {},
+  Query: {
+    tables: compose<any, ResolverContext>(authResolver, verifyTokenResolver)(
+      (parent, args, { db, entityAuthenticated }: ResolverContext) => {
+        const { restaurant: restaurantId } = entityAuthenticated!;
+        return db!.Table.findAll({
+          where: {
+            restaurantId,
+          }
+        });
+      }
+    )
+  },
   Mutation: {
-    createTable: async (parent, { input: { name, restaurant, status } }: { input: CreateTableInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-      // todo implement create table
-      if (!name) throw new Error('Name is required');
-      if (!restaurant) throw new Error('Restaurant ID is required');
+    createTable: compose<any, ResolverContext>(authResolver, verifyTokenResolver)(
+      async (parent, { input }, { db }: ResolverContext) => {
+        const { name, restaurant, status } = <CreateTableInput>input;
 
-      return db.Table.create({
-        name,
-        // @ts-ignore
-        restaurantId: restaurant,
-        status: status || TableStatusEnum.ACTIVE
-      });
-    }
+        if (!name) throw new Error('Name is required');
+        if (!restaurant) throw new Error('Restaurant ID is required');
+
+        return db!.Table.create({
+          name,
+          restaurantId: restaurant,
+          status: status || TableStatusEnum.ACTIVE
+        });
+      }
+    )
   },
   Table: {
-    restaurant: (table, args, {db}: {db: DbConnection}, info) => {
+    restaurant: (table, args, { db }: { db: DbConnection }) => {
       return db.Restaurant.find({
         where: {
           id: table.restaurantId
         }
-      })
+      });
     }
   }
 };

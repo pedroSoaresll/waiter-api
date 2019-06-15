@@ -7,7 +7,7 @@ import { ModelsInterface } from '../interfaces/ModelsInterface';
 export interface TableAttributes {
   id?: string
   // restaurant?: RestaurantAttributes
-  restaurant?: string
+  restaurantId?: string
   name?: string
   qrcode?: string
   status?: TableStatusEnum

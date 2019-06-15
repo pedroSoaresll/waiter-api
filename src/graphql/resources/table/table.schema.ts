@@ -23,7 +23,7 @@ const tableTypes = `
 `;
 
 const tableQueries = `
-  tables: [Table]
+  tables: [Table!]!
 `;
 
 const tableMutations = `
