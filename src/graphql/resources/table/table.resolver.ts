@@ -5,6 +5,7 @@ import { compose } from '../../../composables/composable.resolver';
 import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
 import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
+import {mustBeCollaborator} from "../../../composables/must-be-collaborator.resolver";
 
 interface CreateTableInput {
   restaurant: string
@@ -26,7 +27,7 @@ export const tableResolvers = {
     )
   },
   Mutation: {
-    createTable: compose<any, ResolverContext>(authResolver, verifyTokenResolver)(
+    createTable: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
       async (parent, { input }, { db }: ResolverContext) => {
         const { name, restaurant, status } = <CreateTableInput>input;
 
