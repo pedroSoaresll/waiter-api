@@ -2,11 +2,11 @@ import { sign } from 'jsonwebtoken';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { compareStringBcrypt, JWT_SECRET } from '../../../utils/utils';
 import Logger from '../../../utils/logger';
-import { AuthTypes } from '../../../commons/enums/auth-types';
-import CollaboratorModel, { CollaboratorStatusEnum } from '../../../models/CollaboratorModel';
+import { CollaboratorStatusEnum } from '../../../models/CollaboratorModel';
 import { RestaurantAttributes, RestaurantStatusEnum } from '../../../models/RestaurantModel';
 import { TableStatusEnum } from '../../../models/TableModel';
-import { GraphQLResolveInfo } from 'graphql';
+import { OrderStatusEnum } from '../../../models/OrderModel';
+import { ClientInstance } from '../../../models/ClientModel';
 
 const logger = Logger('GRAPHQL:TOKEN:RESOLVER');
 
@@ -31,6 +31,7 @@ export interface TokenInfo {
 
 export interface ClientTokenInfo extends TokenInfo {
   tableId: string
+  orderId: string
 }
 
 export const tokenResolvers = {
@@ -89,7 +90,7 @@ export const tokenResolvers = {
         });
     },
     createTokenToClient: async (parent, { input }: { input: CreateTokenToClientInput }, { db }: { db: DbConnection }) => {
-      const result = await db.Restaurant.find<RestaurantAttributes>({
+      const restaurantAndTable = await db.Restaurant.find<RestaurantAttributes>({
         where: {
           id: input.restaurantId,
           status: RestaurantStatusEnum.ACTIVE,
@@ -105,22 +106,42 @@ export const tokenResolvers = {
             as: 'tables'
           }
         ]
+      }).catch(err => {
+        logger.error('error to find restaurant and table', { err });
+        throw err;
       });
 
-      if (!result)
+      if (!restaurantAndTable)
         throw new Error('Restaurant or table not found');
 
       const client = await db.Client.create({
         name: input.clientName
+      }).catch(err => {
+        logger.error('error to find client', { err });
+        throw err;
       });
 
       if (!client)
         throw new Error('Error to create user');
 
+      const order = await db.Order.create({
+        status: OrderStatusEnum.PENDING,
+        clientId: client.id,
+        restaurantId: restaurantAndTable.id,
+        tableId: restaurantAndTable.tables![0].id
+      }).catch(err => {
+        logger.error('error to create a order to client', { err });
+        throw err;
+      });
+
+      if (!order)
+        throw new Error('Error to create a new order to the client');
+
       const payload = <ClientTokenInfo>{
         sub: client.id,
-        restaurantId: result!.id,
-        tableId: result!.tables![0].id,
+        restaurantId: restaurantAndTable!.id,
+        tableId: restaurantAndTable!.tables![0].id,
+        orderId: order.id,
         loginType: 'CLIENT'
       };
 

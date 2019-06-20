@@ -1,6 +1,5 @@
 import * as Sequelize from 'sequelize';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
-import { v4 as uuid } from 'uuid';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface CategoryAttributes {
@@ -28,7 +27,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: uuid()
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
       type: DataTypes.STRING,

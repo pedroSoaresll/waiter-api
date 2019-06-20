@@ -33,7 +33,7 @@ export const tableResolvers = {
         if (!name) throw new Error('Name is required');
         if (!restaurant) throw new Error('Restaurant ID is required');
 
-        return db!.Table.create({
+        return db!.Table.prototype.createWithQRCode({
           name,
           restaurantId: restaurant,
           status: status || TableStatusEnum.ACTIVE

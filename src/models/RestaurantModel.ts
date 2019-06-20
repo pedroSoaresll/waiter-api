@@ -1,9 +1,8 @@
 import * as Sequelize from 'sequelize';
-import { v4 as uuid } from 'uuid';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { CollaboratorAccessAttributes } from './CollaboratorAccessModel';
-import {TableAttributes} from "./TableModel";
+import { TableAttributes } from './TableModel';
 
 export enum RestaurantStatusEnum {
   ACTIVE = 'ACTIVE',
@@ -31,7 +30,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: uuid()
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
       type: DataTypes.STRING,
@@ -62,7 +61,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
         allowNull: true,
       },
       as: 'collaboratorsAccess'
-    })
+    });
 
     Restaurant.hasMany(models.Table, {
       foreignKey: {
@@ -70,7 +69,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
         field: 'restaurant'
       },
       as: 'tables'
-    })
+    });
   };
 
   return Restaurant;

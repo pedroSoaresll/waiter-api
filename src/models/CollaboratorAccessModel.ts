@@ -1,5 +1,4 @@
 import * as Sequelize from 'sequelize';
-import { v4 as uuid } from 'uuid';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { RestaurantAttributes } from './RestaurantModel';
 import { CollaboratorAttributes } from './CollaboratorModel';
@@ -36,7 +35,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: uuid()
+      defaultValue: DataTypes.UUIDV4
     },
     accessType: {
       type: DataTypes.ENUM(['ADMIN', 'COMMON']),

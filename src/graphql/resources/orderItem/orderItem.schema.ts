@@ -11,6 +11,10 @@ const orderItemTypes = `
     doneAt: String
   }
   
+  input CreateOrderItemInput {
+    itemId: String!
+  }
+  
   enum OrderItemStatusEnum {
     PENDING
     DOING
@@ -20,6 +24,8 @@ const orderItemTypes = `
 
 const orderItemQueries = ``;
 
-const orderItemMutations = ``;
+const orderItemMutations = `
+  createOrderItem(input: CreateOrderItemInput!): OrderItem!
+`;
 
 export { orderItemTypes, orderItemQueries, orderItemMutations }

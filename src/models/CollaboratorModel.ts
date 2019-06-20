@@ -1,5 +1,4 @@
 import * as Sequelize from 'sequelize';
-import { v4 as uuid } from 'uuid';
 import { compareSync } from 'bcryptjs';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
@@ -31,7 +30,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: uuid()
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
       type: DataTypes.STRING,

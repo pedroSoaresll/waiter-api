@@ -1,5 +1,4 @@
 import * as Sequelize from 'sequelize';
-import { v4 as uuid } from 'uuid';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 
 export interface ClientAttributes {
@@ -20,7 +19,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: uuid()
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
       type: DataTypes.STRING,
@@ -29,5 +28,9 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
   }, {
     tableName: 'clients',
     timestamps: true,
+    name: {
+      plural: 'clients',
+      singular: 'client'
+    }
   });
 }
