@@ -2,10 +2,14 @@ import { NextFunction, Request, RequestHandler, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../utils/utils';
 import db from '../models';
-import { EntityAuthenticated } from '../interfaces/EntityAuthenticatedInterface';
+import {
+  ClientEntityAuthenticated,
+  CollaboratorEntityAuthenticated,
+  EntityAuthenticated
+} from '../interfaces/EntityAuthenticatedInterface';
 import { CollaboratorAttributes, CollaboratorInstance } from '../models/CollaboratorModel';
 import { ClientTokenInfo, TokenInfo } from '../graphql/resources/token/token.resolvers';
-import { ClientAttributes } from '../models/ClientModel';
+import { ClientAttributes, ClientInstance } from '../models/ClientModel';
 
 export const extractJwtMiddleware = (): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -24,17 +28,18 @@ export const extractJwtMiddleware = (): RequestHandler => {
       let { restaurantId: restaurant, sub: id, loginType } = <TokenInfo>decoded;
 
       if (loginType === 'CLIENT') {
-        const { tableId: table } = <ClientTokenInfo>decoded;
-        const client = await db.Client.findById<ClientAttributes>(id);
+        const { tableId: table, orderId: order } = <ClientTokenInfo>decoded;
+        const client = await db.Client.findById<ClientInstance>(id);
 
         if (!client)
           return next();
 
-        entityAuthenticated = <EntityAuthenticated>{
+        entityAuthenticated = <ClientEntityAuthenticated>{
           id,
           loginType,
           restaurant,
           table,
+          order
         };
       } else {
         const collaborator = await db.Collaborator.findById<CollaboratorAttributes>(id, {
@@ -44,7 +49,7 @@ export const extractJwtMiddleware = (): RequestHandler => {
         if (!collaborator)
           return next();
 
-        entityAuthenticated = <EntityAuthenticated>{
+        entityAuthenticated = <CollaboratorEntityAuthenticated>{
           id,
           restaurant,
           loginType

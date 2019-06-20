@@ -45,6 +45,10 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
   }, {
     tableName: 'items',
     timestamps: true,
+    name: {
+      plural: 'items',
+      singular: 'item'
+    }
   });
 
   Item.associate = (models: ModelsInterface): void => {

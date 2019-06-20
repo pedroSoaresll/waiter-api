@@ -13,6 +13,6 @@ export const mustBeCollaboratorAdmin: ComposableResolver<any, ResolverContext> =
       if (collaboratorTypes.indexOf(<CollaboratorAccessTypeEnum>context.entityAuthenticated!.loginType) === -1)
         throw new Error("You don't have permission to do that action");
 
-      resolver(parent, args, context, info);
+      return resolver(parent, args, context, info);
     }
   };
