@@ -15,8 +15,8 @@ export interface OrderAttributes {
 
 export enum OrderStatusEnum {
   PENDING = 'PENDING',
-  DOING = 'DOING',
-  DONE = 'DONE',
+  PROGRESS = 'PROGRESS',
+  FINISH = 'FINISH',
 }
 
 export interface OrderInstance extends Sequelize.Instance<OrderAttributes>, OrderAttributes {}
@@ -37,7 +37,11 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       defaultValue: 0.00
     },
     status: {
-      type: DataTypes.ENUM(['PENDING', 'DOING', 'DONE']),
+      type: DataTypes.ENUM([
+        OrderStatusEnum.PENDING,
+        OrderStatusEnum.PROGRESS,
+        OrderStatusEnum.FINISH
+      ]),
       allowNull: false,
     },
   }, {

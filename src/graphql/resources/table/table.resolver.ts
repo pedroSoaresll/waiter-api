@@ -5,7 +5,7 @@ import { compose } from '../../../composables/composable.resolver';
 import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
 import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
-import {mustBeCollaborator} from "../../../composables/must-be-collaborator.resolver";
+import { mustBeCollaborator } from '../../../composables/must-be-collaborator.resolver';
 
 interface CreateTableInput {
   restaurant: string
@@ -34,7 +34,7 @@ export const tableResolvers = {
         if (!name) throw new Error('Name is required');
         if (!restaurant) throw new Error('Restaurant ID is required');
 
-        return db!.Table.prototype.createWithQRCode({
+        return await db!.Table.prototype.createWithQRCode({
           name,
           restaurantId: restaurant,
           status: status || TableStatusEnum.ACTIVE

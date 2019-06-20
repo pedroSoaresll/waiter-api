@@ -91,19 +91,14 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     });
   };
 
-  Table.prototype.createWithQRCode = async ({ name, restaurantId, status }: CreateWithQRCodeInterface) => {
-    const table = await Table.create({
+  Table.prototype.createWithQRCode = async ({ name, restaurantId, status }: CreateWithQRCodeInterface): Promise<TableInstance> => {
+    return Table.create({
       name,
       restaurantId,
       status
     }).catch(error => {
       throw error;
     });
-
-    if (!table)
-      throw new Error('Error to create a new table');
-
-    return table;
   };
 
   return Table;

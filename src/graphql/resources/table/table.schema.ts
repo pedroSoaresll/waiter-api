@@ -27,7 +27,7 @@ const tableQueries = `
 `;
 
 const tableMutations = `
-  createTable(input: CreateTableInput!): Table
+  createTable(input: CreateTableInput!): Table!
 `;
 
 export { tableTypes, tableQueries, tableMutations }

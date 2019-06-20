@@ -1,18 +1,16 @@
 import * as Sequelize from 'sequelize';
-import { ItemAttributes } from './ItemModel';
-import { OrderAttributes } from './OrderModel';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 
 export interface OrderItemAttributes {
-  id: string
-  item: ItemAttributes
-  order: OrderAttributes
-  status: OrderItemStatusEnum
-  createdAt: Date
-  updatedAt: Date
-  doingAt: Date
-  doneAt: Date
+  id?: string
+  itemId?: string
+  orderId?: string
+  status?: OrderItemStatusEnum
+  createdAt?: Date
+  updatedAt?: Date
+  doingAt?: Date
+  doneAt?: Date
 }
 
 export enum OrderItemStatusEnum {
