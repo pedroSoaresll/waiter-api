@@ -33,6 +33,10 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4
     },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     doingAt: {
       type: DataTypes.DATE,
     },

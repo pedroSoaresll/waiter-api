@@ -21,6 +21,7 @@ import { collaboratorResolver } from './resources/collaborator/collaborator.reso
 import { tableResolvers } from './resources/table/table.resolver';
 import { categoryResolver } from './resources/category/category.resolvers';
 import { itemResolver } from './resources/item/item.resolvers';
+import { orderItemResolver } from './resources/orderItem/orderItem.resolvers';
 
 const resolvers = mergeWith(
   clientResolvers,
@@ -30,7 +31,8 @@ const resolvers = mergeWith(
   collaboratorResolver,
   tableResolvers,
   categoryResolver,
-  itemResolver
+  itemResolver,
+  orderItemResolver
   )
 ;
 
