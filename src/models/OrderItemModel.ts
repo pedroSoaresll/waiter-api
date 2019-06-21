@@ -14,6 +14,7 @@ export interface OrderItemAttributes {
 }
 
 export enum OrderItemStatusEnum {
+  CANCELED = 'CANCELED',
   PENDING = 'PENDING',
   DOING = 'DOING',
   DONE = 'DONE'
@@ -32,7 +33,12 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       defaultValue: DataTypes.UUIDV4
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM([
+        OrderItemStatusEnum.CANCELED,
+        OrderItemStatusEnum.PENDING,
+        OrderItemStatusEnum.DOING,
+        OrderItemStatusEnum.DONE,
+      ]),
       allowNull: false
     },
     doingAt: {

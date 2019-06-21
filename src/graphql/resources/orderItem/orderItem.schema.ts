@@ -15,7 +15,12 @@ const orderItemTypes = `
     itemId: String!
   }
   
+  input RemoveOrderItemInput {
+    orderItemId: String!
+  }
+  
   enum OrderItemStatusEnum {
+    CANCELED
     PENDING
     DOING
     DONE
@@ -26,6 +31,7 @@ const orderItemQueries = ``;
 
 const orderItemMutations = `
   createOrderItem(input: CreateOrderItemInput!): OrderItem!
+  removeOrderItem(input: RemoveOrderItemInput!): OrderItem!
 `;
 
 export { orderItemTypes, orderItemQueries, orderItemMutations }

@@ -22,6 +22,7 @@ import { tableResolvers } from './resources/table/table.resolver';
 import { categoryResolver } from './resources/category/category.resolvers';
 import { itemResolver } from './resources/item/item.resolvers';
 import { orderItemResolver } from './resources/orderItem/orderItem.resolvers';
+import { orderResolver } from './resources/order/order.resolvers';
 
 const resolvers = mergeWith(
   clientResolvers,
@@ -32,9 +33,9 @@ const resolvers = mergeWith(
   tableResolvers,
   categoryResolver,
   itemResolver,
-  orderItemResolver
-  )
-;
+  orderItemResolver,
+  orderResolver,
+);
 
 const SchemaDefinition = `
   type Schema {

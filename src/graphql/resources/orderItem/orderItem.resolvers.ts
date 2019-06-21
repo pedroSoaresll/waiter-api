@@ -3,7 +3,6 @@ import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
 import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
 import { mustBeClient } from '../../../composables/must-be-client.resolver';
-import { ClientTokenInfo } from '../token/token.resolvers';
 import { OrderItemInstance, OrderItemStatusEnum } from '../../../models/OrderItemModel';
 import { ClientEntityAuthenticated } from '../../../interfaces/EntityAuthenticatedInterface';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
@@ -13,6 +12,10 @@ import { ItemInstance } from '../../../models/ItemModel';
 
 interface CreateOrderItem {
   itemId: string
+}
+
+interface RemoveOrderItem {
+  orderItemId: string
 }
 
 export const orderItemResolver = {
@@ -29,8 +32,6 @@ export const orderItemResolver = {
       async (parent, { input }, { db, entityAuthenticated }: ResolverContext) => {
         const { itemId } = <CreateOrderItem>input;
         const { order: orderId } = <ClientEntityAuthenticated>entityAuthenticated;
-        console.log(itemId);
-        console.log(orderId);
 
         // check order
         const order = await db!.Order.findById(orderId);
@@ -44,6 +45,35 @@ export const orderItemResolver = {
           orderId,
           itemId,
           status: OrderItemStatusEnum.PENDING
+        });
+      }
+    ),
+    removeOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeClient)(
+      async (parent, { input }, { db, entityAuthenticated }: ResolverContext) => {
+        const { orderItemId } = <RemoveOrderItem>input;
+        const { order: orderId } = <ClientEntityAuthenticated>entityAuthenticated;
+
+        // check order
+        const order = await db!.Order.findById<OrderInstance>(orderId);
+        if (!order)
+          throw new Error('Order not found');
+
+        // get orderItem
+        const orderItem = await db!.OrderItem.findById<OrderItemInstance>(orderItemId);
+        if (!orderItem)
+          throw new Error('OrderItem not found');
+
+        // if orderItem is canceled return error
+        if (orderItem.status === OrderItemStatusEnum.CANCELED)
+          throw new Error('OrderItem is already canceled');
+
+        // if orderItem is with done and doing status return error
+        if (orderItem.status !== OrderItemStatusEnum.PENDING)
+          throw new Error('This OrderItem can not be canceled');
+
+        // change status orderItem to canceled
+        return orderItem.updateAttributes({
+          status: OrderItemStatusEnum.CANCELED
         });
       }
     )
