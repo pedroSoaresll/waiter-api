@@ -1,12 +1,14 @@
 import * as Sequelize from 'sequelize';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
+import { OrderItemInstance } from './OrderItemModel';
 
 export interface OrderAttributes {
   id?: string
   restaurantId?: string
   tableId?: string
   clientId?: string
+  orderItems?: OrderItemInstance[]
   amount?: number
   status?: OrderStatusEnum
   createdAt?: Date
@@ -66,7 +68,8 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       foreignKey: {
         allowNull: true,
         field: 'order'
-      }
+      },
+      as: 'orderItems'
     });
 
     Order.belongsTo(models.Table, {

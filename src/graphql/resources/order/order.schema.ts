@@ -21,6 +21,8 @@ const orderTypes = `
 
 const orderQueries = ``;
 
-const orderMutations = ``;
+const orderMutations = `
+  closeOrder: Order!
+`;
 
 export { orderTypes, orderQueries, orderMutations }

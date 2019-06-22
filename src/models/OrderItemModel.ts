@@ -1,6 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
+import { ItemInstance } from './ItemModel';
 
 export interface OrderItemAttributes {
   id?: string
@@ -11,6 +12,7 @@ export interface OrderItemAttributes {
   updatedAt?: Date
   doingAt?: Date
   doneAt?: Date
+  item?: ItemInstance
 }
 
 export enum OrderItemStatusEnum {
@@ -57,7 +59,8 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       foreignKey: {
         allowNull: false,
         field: 'item'
-      }
+      },
+      as: 'item'
     });
 
     OrderItem.belongsTo(models.Order, {
