@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc33614a-6e42-4937-b6ef-1719e0c32863" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/OrderItemModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/OrderItemModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -29,6 +24,27 @@
               <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="81" column="50" selection-start-line="81" selection-start-column="50" selection-end-line="81" selection-end-column="50" />
+              <folding>
+                <element signature="e#0#74#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.schema.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="38" column="8" lean-forward="true" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+            <state relative-caret-position="307">
+              <caret line="40" column="3" lean-forward="true" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -106,15 +122,15 @@
         <option value="$PROJECT_DIR$/src/interfaces/EntityAuthenticatedInterface.ts" />
         <option value="$PROJECT_DIR$/src/models/ItemModel.ts" />
         <option value="$PROJECT_DIR$/src/graphql/schema.ts" />
-        <option value="$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts" />
         <option value="$PROJECT_DIR$/src/models/OrderModel.ts" />
         <option value="$PROJECT_DIR$/src/app.ts" />
         <option value="$PROJECT_DIR$/src/middlewares/extract-jwt.middleware.ts" />
-        <option value="$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts" />
         <option value="$PROJECT_DIR$/src/graphql/resources/restaurant/restaurant.resolvers.ts" />
         <option value="$PROJECT_DIR$/src/models/OrderItemModel.ts" />
         <option value="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.resolvers.ts" />
         <option value="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.schema.ts" />
+        <option value="$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts" />
+        <option value="$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts" />
       </list>
     </option>
   </component>
@@ -155,6 +171,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="graphql" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="virtual-waiter-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="virtual-waiter-backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="graphql" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="order" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="virtual-waiter-backend" type="b2602c69:ProjectViewProjectNode" />
@@ -229,18 +253,18 @@
       <workItem from="1561087966524" duration="3262000" />
       <workItem from="1561136604538" duration="48000" />
       <workItem from="1561150924761" duration="4370000" />
-      <workItem from="1561408566701" duration="6573000" />
+      <workItem from="1561408566701" duration="7225000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24990000" />
+    <option name="totallyTimeSpent" value="25642000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="1" width="2560" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19865984" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19865984" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="DB Browser" order="3" />
@@ -256,7 +280,7 @@
       <window_info anchor="bottom" id="GraphQL" order="8" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32912722" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32912722" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -1411,13 +1435,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/RestaurantModel.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1495,13 +1512,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dataloaders/CategoryLoader.ts">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="33" column="14" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="14" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/composables/composable.resolver.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -1695,8 +1705,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.schema.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="38" column="8" lean-forward="true" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        <state relative-caret-position="307">
+          <caret line="40" column="3" lean-forward="true" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="81" column="50" selection-start-line="81" selection-start-column="50" selection-end-line="81" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
         </state>
       </provider>
     </entry>

@@ -1,15 +1,15 @@
-import { OrderInstance, OrderStatusEnum } from '../../../models/OrderModel';
-import { DataLoaders } from '../../../interfaces/DataLoadersInterface';
-import { DbConnection } from '../../../interfaces/DbConnectionInterface';
-import { TableInstance } from '../../../models/TableModel';
-import { ClientInstance } from '../../../models/ClientModel';
-import { OrderItemInstance, OrderItemStatusEnum } from '../../../models/OrderItemModel';
-import { compose } from '../../../composables/composable.resolver';
-import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
-import { authResolver } from '../../../composables/auth.resolver';
-import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
-import { mustBeClient } from '../../../composables/must-be-client.resolver';
-import { ClientEntityAuthenticated } from '../../../interfaces/EntityAuthenticatedInterface';
+import {OrderInstance, OrderStatusEnum} from '../../../models/OrderModel';
+import {DataLoaders} from '../../../interfaces/DataLoadersInterface';
+import {DbConnection} from '../../../interfaces/DbConnectionInterface';
+import {TableInstance} from '../../../models/TableModel';
+import {ClientInstance} from '../../../models/ClientModel';
+import {OrderItemInstance, OrderItemStatusEnum} from '../../../models/OrderItemModel';
+import {compose} from '../../../composables/composable.resolver';
+import {ResolverContext} from '../../../interfaces/ResolverContextInterface';
+import {authResolver} from '../../../composables/auth.resolver';
+import {verifyTokenResolver} from '../../../composables/verify-token.resolver';
+import {mustBeClient} from '../../../composables/must-be-client.resolver';
+import {ClientEntityAuthenticated} from '../../../interfaces/EntityAuthenticatedInterface';
 
 export const orderResolver = {
   Order: {
@@ -66,7 +66,8 @@ export const orderResolver = {
           ( value =>
               [
                 OrderItemStatusEnum.PENDING,
-                OrderItemStatusEnum.DOING
+                OrderItemStatusEnum.DOING,
+                OrderItemStatusEnum.DONE,
               ]
                 .includes(value.status!)
           )
