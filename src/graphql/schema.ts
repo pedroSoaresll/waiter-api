@@ -44,7 +44,7 @@ const SchemaDefinition = `
   }
   
   type Subscription {
-    orderItemStatusUpdated: OrderItem
+    orderItemStatusUpdated: OrderItem!
   }
 `;
 

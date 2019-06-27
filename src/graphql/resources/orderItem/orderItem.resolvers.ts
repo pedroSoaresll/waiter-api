@@ -125,10 +125,17 @@ export const orderItemResolver = {
         if (orderItem.status !== OrderItemStatusEnum.PENDING)
           throw new Error('This OrderItem can not be updated');
 
-        return orderItem.updateAttributes({
+        const orderItemUpdated = await orderItem.updateAttributes({
           status: OrderItemStatusEnum.DOING,
           doingAt: new Date(),
         });
+
+        console.log('order item updated', orderItemUpdated);
+        await pubsub.publish(ORDER_ITEM_STATUS_UPDATED, {
+          orderItemStatusUpdated: orderItemUpdated
+        });
+
+        return orderItemUpdated;
       }
     ),
     doneOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
@@ -143,10 +150,16 @@ export const orderItemResolver = {
         if (orderItem.status !== OrderItemStatusEnum.DOING)
           throw new Error('This OrderItem can not be updated');
 
-        return orderItem.updateAttributes({
+        const orderItemUpdated = await orderItem.updateAttributes({
           status: OrderItemStatusEnum.DONE,
           doneAt: new Date(),
         });
+
+        await pubsub.publish(ORDER_ITEM_STATUS_UPDATED, {
+          orderItemStatusUpdated: orderItemUpdated
+        });
+
+        return orderItemUpdated;
       }
     ),
     deliveredOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
@@ -161,10 +174,16 @@ export const orderItemResolver = {
         if (orderItem.status !== OrderItemStatusEnum.DONE)
           throw new Error('This OrderItem can not be updated');
 
-        return orderItem.updateAttributes({
+        const orderItemUpdated = await orderItem.updateAttributes({
           status: OrderItemStatusEnum.DELIVERED,
           deliveredAt: new Date(),
         });
+
+        await pubsub.publish(ORDER_ITEM_STATUS_UPDATED, {
+          orderItemStatusUpdated: orderItemUpdated
+        });
+
+        return orderItemUpdated;
       }
     )
   },
