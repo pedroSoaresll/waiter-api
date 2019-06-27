@@ -1,4 +1,4 @@
-import { PubSub } from 'graphql-subscriptions';
+import { PubSub, withFilter } from 'graphql-subscriptions';
 import { compose } from '../../../composables/composable.resolver';
 import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
@@ -189,7 +189,14 @@ export const orderItemResolver = {
   },
   Subscription: {
     orderItemStatusUpdated: {
-      subscribe: () => pubsub.asyncIterator(ORDER_ITEM_STATUS_UPDATED)
+      subscribe: withFilter(
+        () => pubsub.asyncIterator(ORDER_ITEM_STATUS_UPDATED),
+        (payload, variables) => {
+          console.log('what is the payload', payload)
+          console.log('what is the variables', variables)
+          return true
+        }
+      )
     }
   }
 };
