@@ -42,6 +42,10 @@ const SchemaDefinition = `
     query: Query
     mutation: Mutation
   }
+  
+  type Subscription {
+    orderItemStatusUpdated: OrderItem
+  }
 `;
 
 export default makeExecutableSchema({

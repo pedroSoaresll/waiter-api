@@ -1,3 +1,4 @@
+import { PubSub } from 'graphql-subscriptions';
 import { compose } from '../../../composables/composable.resolver';
 import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
@@ -17,6 +18,9 @@ interface CreateOrderItem {
 interface RemoveOrderItem {
   orderItemId: string
 }
+
+const ORDER_ITEM_STATUS_UPDATED = 'ORDER_ITEM_STATUS_UPDATED';
+const pubsub = new PubSub();
 
 export const orderItemResolver = {
   OrderItem: {
@@ -77,5 +81,10 @@ export const orderItemResolver = {
         });
       }
     )
+  },
+  Subscription: {
+    orderItemStatusUpdated: {
+      subscribe: () => pubsub.asyncIterator(ORDER_ITEM_STATUS_UPDATED)
+    }
   }
 };
