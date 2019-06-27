@@ -16,6 +16,7 @@ const orderTypes = `
     PENDING
     DOING
     DONE
+    FINISH
   }
 `;
 

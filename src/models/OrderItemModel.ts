@@ -19,7 +19,8 @@ export enum OrderItemStatusEnum {
   CANCELED = 'CANCELED',
   PENDING = 'PENDING',
   DOING = 'DOING',
-  DONE = 'DONE'
+  DONE = 'DONE',
+  DELIVERED = 'DELIVERED',
 }
 
 export interface OrderItemInstance extends Sequelize.Instance<OrderItemAttributes>, OrderItemAttributes {}
@@ -40,6 +41,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
         OrderItemStatusEnum.PENDING,
         OrderItemStatusEnum.DOING,
         OrderItemStatusEnum.DONE,
+        OrderItemStatusEnum.DELIVERED,
       ]),
       allowNull: false
     },
@@ -47,6 +49,9 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.DATE,
     },
     doneAt: {
+      type: DataTypes.DATE
+    },
+    deliveredAt: {
       type: DataTypes.DATE
     }
   }, {
