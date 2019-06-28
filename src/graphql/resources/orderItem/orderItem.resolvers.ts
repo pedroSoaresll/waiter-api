@@ -99,18 +99,8 @@ export const orderItemResolver = {
         if (!orderItem)
           throw new Error('OrderItem not found');
 
-        // if orderItem is canceled return error
-        if (orderItem.status === OrderItemStatusEnum.CANCELED)
-          throw new Error('OrderItem is already canceled');
-
-        // if orderItem is with done and doing status return error
-        if (orderItem.status !== OrderItemStatusEnum.PENDING)
-          throw new Error('This OrderItem can not be canceled');
-
-        // change status orderItem to canceled
-        return orderItem.updateAttributes({
-          status: OrderItemStatusEnum.CANCELED
-        });
+        // remove order item
+        return db!.OrderItem.prototype.remove(orderItem);
       }
     ),
     doingOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
