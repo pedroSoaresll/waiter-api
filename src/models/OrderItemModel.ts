@@ -23,9 +23,9 @@ export enum OrderItemStatusEnum {
   DELIVERED = 'DELIVERED',
 }
 
-export interface OrderItemInstance extends Sequelize.Instance<OrderItemAttributes>, OrderItemAttributes {}
+export interface OrderItemInstance extends Sequelize.Instance<OrderItemAttributes>, OrderItemAttributes { }
 
-export interface OrderItemModel extends BaseModelInterface, Sequelize.Model<OrderItemInstance, OrderItemAttributes> {}
+export interface OrderItemModel extends BaseModelInterface, Sequelize.Model<OrderItemInstance, OrderItemAttributes> { }
 
 export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): OrderItemModel => {
   const OrderItem: OrderItemModel = sequelize.define('OrderItem', {
@@ -55,9 +55,9 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.DATE
     }
   }, {
-    tableName: 'orderItems',
-    timestamps: true
-  });
+      tableName: 'orderItems',
+      timestamps: true
+    });
 
   OrderItem.associate = (models: ModelsInterface): void => {
     OrderItem.belongsTo(models.Item, {
@@ -75,6 +75,21 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       }
     });
   };
+
+  OrderItem.prototype.remove = (orderItem: OrderItemInstance) => {
+    // if orderItem is canceled return error
+    if (orderItem.status === OrderItemStatusEnum.CANCELED)
+      throw new Error('OrderItem is already canceled');
+
+    // if orderItem is with done and doing status return error
+    if (orderItem.status !== OrderItemStatusEnum.PENDING)
+      throw new Error('This OrderItem can not be canceled');
+
+    // change status orderItem to canceled
+    return orderItem.updateAttributes({
+      status: OrderItemStatusEnum.CANCELED
+    });
+  }
 
   return OrderItem;
 }
