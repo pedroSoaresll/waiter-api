@@ -19,11 +19,12 @@ db.sequelize.sync()
       new SubscriptionServer({
         execute,
         subscribe,
-        schema
+        schema,
+        onConnect: (connectionParams) => connectionParams,
       }, {
         server,
-        path: '/graphql'
-      });
+        path: '/graphql',
+      })
     });
     server.on('error', onError(server));
     server.on('listening', onListening(server));
