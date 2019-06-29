@@ -1,4 +1,5 @@
-import { PubSub, withFilter } from 'graphql-subscriptions';
+import { GraphQLResolveInfo } from 'graphql';
+
 import { compose } from '../../../composables/composable.resolver';
 import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
@@ -8,9 +9,9 @@ import { OrderItemInstance, OrderItemStatusEnum } from '../../../models/OrderIte
 import { ClientEntityAuthenticated } from '../../../interfaces/EntityAuthenticatedInterface';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { OrderInstance } from '../../../models/OrderModel';
-import { GraphQLResolveInfo } from 'graphql';
 import { ItemInstance } from '../../../models/ItemModel';
 import { mustBeCollaborator } from '../../../composables/must-be-collaborator.resolver';
+import { subscriptionStatusChanged, GraphqlOrderItemSubscriptions, subscribes } from './orderItem.subscriptions'
 
 interface CreateOrderItem {
   itemId: string
@@ -32,21 +33,18 @@ interface DeliveredOrderItem {
   orderItemId: string
 }
 
-const ORDER_ITEM_STATUS_UPDATED = 'ORDER_ITEM_STATUS_UPDATED';
-const pubsub = new PubSub();
-
 export const orderItemResolver = {
   OrderItem: {
-    order: (OrderItem: OrderItemInstance, args, {db}: { db: DbConnection }, info: GraphQLResolveInfo) => {
+    order: (OrderItem: OrderItemInstance, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
       return db.Order.findById<OrderInstance>(OrderItem.orderId);
     },
-    item: (OrderItem: OrderItemInstance, args, {db}: { db: DbConnection }, info: GraphQLResolveInfo) => {
+    item: (OrderItem: OrderItemInstance, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
       return db.Item.findById<ItemInstance>(OrderItem.itemId);
     }
   },
   Query: {
     order: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeClient)(
-      async (parent, args, {entityAuthenticated, db}: ResolverContext) => {
+      async (parent, args, { entityAuthenticated, db }: ResolverContext) => {
         // get orderId from client token
         const clientEntityAuth = <ClientEntityAuthenticated>entityAuthenticated;
 
@@ -64,9 +62,9 @@ export const orderItemResolver = {
   },
   Mutation: {
     createOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeClient)(
-      async (parent, {input}, {db, entityAuthenticated}: ResolverContext) => {
-        const {itemId} = <CreateOrderItem>input;
-        const {order: orderId} = <ClientEntityAuthenticated>entityAuthenticated;
+      async (parent, { input }, { db, entityAuthenticated }: ResolverContext) => {
+        const { itemId } = <CreateOrderItem>input;
+        const { order: orderId } = <ClientEntityAuthenticated>entityAuthenticated;
 
         // check order
         const order = await db!.Order.findById(orderId);
@@ -85,9 +83,9 @@ export const orderItemResolver = {
       }
     ),
     removeOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeClient)(
-      async (parent, {input}, {db, entityAuthenticated}: ResolverContext) => {
-        const {orderItemId} = <RemoveOrderItem>input;
-        const {order: orderId} = <ClientEntityAuthenticated>entityAuthenticated;
+      async (parent, { input }, { db, entityAuthenticated }: ResolverContext) => {
+        const { orderItemId } = <RemoveOrderItem>input;
+        const { order: orderId } = <ClientEntityAuthenticated>entityAuthenticated;
 
         // check order
         const order = await db!.Order.findById<OrderInstance>(orderId);
@@ -104,7 +102,7 @@ export const orderItemResolver = {
       }
     ),
     doingOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
-      async (parent, {input}, {db}: ResolverContext) => {
+      async (parent, { input }, { db }: ResolverContext) => {
         const param: DoingOrderItem = input;
         // todo - check if order item belongs to restaurant from collaborator authenticated
         const orderItem = await db!.OrderItem.findById(param.orderItemId);
@@ -112,24 +110,16 @@ export const orderItemResolver = {
         if (!orderItem)
           throw new Error('OrderItem not found');
 
-        if (orderItem.status !== OrderItemStatusEnum.PENDING)
-          throw new Error('This OrderItem can not be updated');
+        // update order item status to doing
+        const orderItemUpdated = await db!.OrderItem.prototype.doing(orderItem);
 
-        const orderItemUpdated = await orderItem.updateAttributes({
-          status: OrderItemStatusEnum.DOING,
-          doingAt: new Date(),
-        });
-
-        console.log('order item updated', orderItemUpdated);
-        await pubsub.publish(ORDER_ITEM_STATUS_UPDATED, {
-          orderItemStatusUpdated: orderItemUpdated
-        });
+        subscriptionStatusChanged(orderItem);
 
         return orderItemUpdated;
       }
     ),
     doneOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
-      async (parent, {input}, {db}: ResolverContext) => {
+      async (parent, { input }, { db }: ResolverContext) => {
         const param: DoneOrderItem = input;
         // todo - check if order item belongs to restaurant from collaborator authenticated
         const orderItem = await db!.OrderItem.findById(param.orderItemId);
@@ -137,41 +127,28 @@ export const orderItemResolver = {
         if (!orderItem)
           throw new Error('OrderItem not found');
 
-        if (orderItem.status !== OrderItemStatusEnum.DOING)
-          throw new Error('This OrderItem can not be updated');
+        // update order item status to done
+        const orderItemUpdated = await db!.OrderItem.prototype.doing(orderItem);
 
-        const orderItemUpdated = await orderItem.updateAttributes({
-          status: OrderItemStatusEnum.DONE,
-          doneAt: new Date(),
-        });
-
-        await pubsub.publish(ORDER_ITEM_STATUS_UPDATED, {
-          orderItemStatusUpdated: orderItemUpdated
-        });
+        subscriptionStatusChanged(orderItem);
 
         return orderItemUpdated;
       }
     ),
     deliveredOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
-      async (parent, {input}, {db}: ResolverContext) => {
+      async (parent, { input }, { db }: ResolverContext) => {
         const param: DeliveredOrderItem = input;
-        // todo - check if order item belongs to restaurant from collaborator authenticated
+        // todo - check if OrderItem belongs to restaurant from collaborator authenticated
         const orderItem = await db!.OrderItem.findById(param.orderItemId);
 
         if (!orderItem)
           throw new Error('OrderItem not found');
 
-        if (orderItem.status !== OrderItemStatusEnum.DONE)
-          throw new Error('This OrderItem can not be updated');
+        // update OrderItem status to done
+        const orderItemUpdated = await db!.OrderItem.prototype.delivered(orderItem);
 
-        const orderItemUpdated = await orderItem.updateAttributes({
-          status: OrderItemStatusEnum.DELIVERED,
-          deliveredAt: new Date(),
-        });
-
-        await pubsub.publish(ORDER_ITEM_STATUS_UPDATED, {
-          orderItemStatusUpdated: orderItemUpdated
-        });
+        // emit on graphql subscriptions that OrderItem was updated
+        subscriptionStatusChanged(orderItem);
 
         return orderItemUpdated;
       }
@@ -179,14 +156,7 @@ export const orderItemResolver = {
   },
   Subscription: {
     orderItemStatusUpdated: {
-      subscribe: withFilter(
-        () => pubsub.asyncIterator(ORDER_ITEM_STATUS_UPDATED),
-        (payload, variables) => {
-          console.log('what is the payload', payload)
-          console.log('what is the variables', variables)
-          return true
-        }
-      )
+      subscribe: subscribes.statusUpdated,
     }
   }
 };
