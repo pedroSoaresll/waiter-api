@@ -1,7 +1,6 @@
 import { ComposableResolver } from "./composable.resolver";
 import { ResolverContext } from "../interfaces/ResolverContextInterface";
 import { GraphQLFieldResolver } from "graphql";
-import { CollaboratorAccessTypeEnum } from "../models/CollaboratorAccessModel";
 
 export const mustBeClient: ComposableResolver<any, ResolverContext> =
   (resolver: GraphQLFieldResolver<any, ResolverContext>): GraphQLFieldResolver<any, ResolverContext> => {
