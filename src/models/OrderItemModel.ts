@@ -91,5 +91,35 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     });
   }
 
+  OrderItem.prototype.doing = (orderItem: OrderItemInstance) => {
+    if (orderItem.status !== OrderItemStatusEnum.PENDING)
+      throw new Error('This OrderItem can not be updated');
+
+    return orderItem.updateAttributes({
+      status: OrderItemStatusEnum.DOING,
+      doingAt: new Date(),
+    });
+  }
+
+  OrderItem.prototype.done = (orderItem: OrderItemInstance) => {
+    if (orderItem.status !== OrderItemStatusEnum.DOING)
+      throw new Error('This OrderItem can not be updated');
+
+    return orderItem.updateAttributes({
+      status: OrderItemStatusEnum.DONE,
+      doneAt: new Date(),
+    });
+  }
+
+  OrderItem.prototype.delivered = (orderItem: OrderItemInstance) => {
+    if (orderItem.status !== OrderItemStatusEnum.DONE)
+      throw new Error('This OrderItem can not be updated');
+
+    return orderItem.updateAttributes({
+      status: OrderItemStatusEnum.DELIVERED,
+      deliveredAt: new Date(),
+    });
+  }
+
   return OrderItem;
 }
