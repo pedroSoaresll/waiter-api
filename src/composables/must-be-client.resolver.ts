@@ -1,7 +1,7 @@
-import {ComposableResolver} from "./composable.resolver";
-import {ResolverContext} from "../interfaces/ResolverContextInterface";
-import {GraphQLFieldResolver} from "graphql";
-import {CollaboratorAccessTypeEnum} from "../models/CollaboratorAccessModel";
+import { ComposableResolver } from "./composable.resolver";
+import { ResolverContext } from "../interfaces/ResolverContextInterface";
+import { GraphQLFieldResolver } from "graphql";
+import { CollaboratorAccessTypeEnum } from "../models/CollaboratorAccessModel";
 
 export const mustBeClient: ComposableResolver<any, ResolverContext> =
   (resolver: GraphQLFieldResolver<any, ResolverContext>): GraphQLFieldResolver<any, ResolverContext> => {
@@ -10,8 +10,8 @@ export const mustBeClient: ComposableResolver<any, ResolverContext> =
         "CLIENT",
       ];
 
-      if (collaboratorTypes.indexOf(<"CLIENT">context.entityAuthenticated!.loginType) === -1)
-        throw new Error("You don't have permission to do that action");
+      if (!collaboratorTypes.includes(context.entityAuthenticated!.loginType))
+        throw new Error("You don't have permission to do this action");
 
       return resolver(parent, args, context, info);
     }
