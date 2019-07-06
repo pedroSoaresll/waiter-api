@@ -2,11 +2,11 @@ FROM node:8.16.0-jessie
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json .
 
 RUN npm i
 
-COPY . /app
+COPY . .
 
 CMD npm start
 
