@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as graphqlHTTP from 'express-graphql';
+import cors from 'cors';
 import schema from './graphql/schema';
 import db from './models';
 import { extractJwtMiddleware } from './middlewares/extract-jwt.middleware';
@@ -30,6 +31,7 @@ class App {
   private middleware(): void {
 
     this.express.use('/graphql',
+      cors(),
 
       extractJwtMiddleware(),
 
@@ -44,7 +46,7 @@ class App {
           schema,
           graphiql: process.env.NODE_ENV === 'development',
           context: req['context'],
-          subscriptionsEndpoint: `ws://localhost:${ port }/subscription`
+          subscriptionsEndpoint: `ws://localhost:${ port }/subscription`,
         } )
       ));
   }
