@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as graphqlHTTP from 'express-graphql';
-import cors from 'cors';
+import * as cors from 'cors';
 import schema from './graphql/schema';
 import db from './models';
 import { extractJwtMiddleware } from './middlewares/extract-jwt.middleware';
@@ -17,7 +17,6 @@ class App {
   private requestedFields!: RequestedFields;
 
   constructor() {
-
     this.express = express();
     this.init();
   }
@@ -29,10 +28,8 @@ class App {
   }
 
   private middleware(): void {
-
+    this.express.use(cors());
     this.express.use('/graphql',
-      cors(),
-
       extractJwtMiddleware(),
 
       (req, res, next) => {

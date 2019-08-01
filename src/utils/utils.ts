@@ -1,4 +1,5 @@
 import { Server } from 'http';
+import { AddressInfo } from 'net';
 import { compareSync, genSaltSync, hashSync } from 'bcryptjs';
 
 export const normalizePort = (val: number | string): number | string | boolean => {
@@ -10,9 +11,11 @@ export const normalizePort = (val: number | string): number | string | boolean =
 
 export const onError = (server: Server) => {
   return (error: NodeJS.ErrnoException): void => {
-    let port: number | string = server.address().port;
+    const addressInfo: AddressInfo = <AddressInfo>server.address();
+    let port: number = addressInfo.port;
+
     if (error.syscall !== 'listen') throw error;
-    let bind = ( typeof port === 'string' ) ? `pipe ${ port }` : `port ${ port }`;
+    let bind = ( typeof port === typeof '' ) ? `pipe ${ port }` : `port ${ port }`;
     switch (error.code) {
       case 'EACCES':
         console.error(`${ bind } requires elevated privileges`);
@@ -30,8 +33,8 @@ export const onError = (server: Server) => {
 
 export const onListening = (server: Server) => {
   return (): void => {
-    let addr = server.address();
-    let bind = ( typeof addr === 'string' ) ? `pipe ${ addr }` : `port ${ addr.port }`;
+    let addr = <AddressInfo>server.address();
+    let bind = ( typeof addr === typeof '' ) ? `pipe ${ addr }` : `port ${ addr.port }`;
     console.log(`Listening at ${ bind }...`);
   };
 };
@@ -47,4 +50,4 @@ export const generatePassword = (password) => {
   const saltRounds = 10;
   const saltGenerated = genSaltSync(saltRounds);
   return hashSync(password, saltGenerated);
-}
+};
