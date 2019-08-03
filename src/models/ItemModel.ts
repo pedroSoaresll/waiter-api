@@ -7,6 +7,8 @@ export interface ItemAttributes {
   categoryId?: string
   restaurantId?: string
   name?: string
+  description?: string
+  image?: string
   amount?: number
   status?: ItemStatusEnum
   createdAt?: Date
@@ -33,6 +35,14 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     amount: {
       type: DataTypes.FLOAT(5, 2),

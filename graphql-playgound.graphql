@@ -1,0 +1,30 @@
+mutation CREATE_RESTAURANT {
+  createRestaurant(input: {
+    displayName: "Ola Mundo"
+    collaboratorName: "Oliveira Pedro"
+    email: "oliveira@email.com"
+    password: "1234"
+  }){
+    id
+  }
+}
+
+mutation CREATE_TOKEN_FOR_COLLABORATOR {
+  createTokenToCollaborator(input: {
+    restaurantName: "ola-mundo"
+    email: "oliveira@email.com"
+    password: "1234"
+  }) {
+    token
+  }
+}
+
+mutation CREATE_TABLE {
+  createTable(input: {
+    restaurant: "2b74ff23-ff9f-472a-9a11-12137856ee01"
+    name: "Mesa 1"
+    status: ACTIVE
+  }) {
+    id
+  }
+}

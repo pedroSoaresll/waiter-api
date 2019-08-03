@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2d974ea9-f712-4036-89b0-c5c930819842" name="Default Changelist" comment=":beers: Writing code drunkenly.">
+    <list default="true" id="2d974ea9-f712-4036-89b0-c5c930819842" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/graphql-playgound.graphql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/resources/item/item.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/item/item.schema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ItemModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ItemModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,6 +29,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
@@ -57,7 +59,8 @@
       <workItem from="1564355126784" duration="1839000" />
       <workItem from="1564449942192" duration="16000" />
       <workItem from="1564624870274" duration="19000" />
-      <workItem from="1564624897109" duration="2326000" />
+      <workItem from="1564624897109" duration="2345000" />
+      <workItem from="1564796208064" duration="3671000" />
     </task>
     <task id="LOCAL-00001" summary=":fire: something">
       <created>1564356307875</created>
@@ -66,7 +69,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564356307875</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary=":beers: Writing code drunkenly.">
+      <created>1564627227594</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1564627227594</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

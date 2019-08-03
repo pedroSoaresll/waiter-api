@@ -5,6 +5,8 @@ const itemTypes = `
     category: Category!
     restaurant: Restaurant!
     name: String!
+    description: String
+    image: String
     amount: Float!
     status: ItemStatusEnum!
     createdAt: String!
