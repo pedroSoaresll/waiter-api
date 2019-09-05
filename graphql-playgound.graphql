@@ -28,3 +28,4 @@ mutation CREATE_TABLE {
     id
   }
 }
+
