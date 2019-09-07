@@ -6,10 +6,10 @@ export class CollaboratorAccessLoader {
       collaboratorAccess.findAll({
         where: {
           id: {
-            $in: ids
-          }
-        }
-      })
+            $in: ids,
+          },
+        },
+      }),
     );
   }
 
@@ -18,10 +18,10 @@ export class CollaboratorAccessLoader {
       collaboratorAccess.findAll({
         where: {
           collaborator: {
-            $in: collaboratorIds
-          }
-        }
-      })
+            $in: collaboratorIds,
+          },
+        },
+      }),
     );
   }
 
@@ -30,10 +30,10 @@ export class CollaboratorAccessLoader {
       collaboratorAccess.findAll({
         where: {
           restaurant: {
-            $in: restaurantIds
-          }
-        }
-      })
+            $in: restaurantIds,
+          },
+        },
+      }),
     );
   }
 }

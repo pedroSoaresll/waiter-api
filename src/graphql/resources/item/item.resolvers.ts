@@ -7,36 +7,34 @@ import { authResolver } from '../../../composables/auth.resolver';
 import { verifyTokenResolver } from '../../../composables/verify-token.resolver';
 
 interface CreateItemInput {
-  categoryId: string
-  name: string
-  amount: number
+  categoryId: string;
+  name: string;
+  amount: number;
 }
 
 interface ItemsByCategoryInterface {
-  category: string
+  category: string;
 }
 
 export const itemResolver = {
   Query: {
     items: compose<any, ResolverContext>(authResolver, verifyTokenResolver)(
-      (parent, args, { entityAuthenticated, db }: ResolverContext) => {
-        return db!.Item.findAll<ItemInstance>({
-          where: {
-            restaurantId: entityAuthenticated!.restaurant
-          }
-        });
-      }
+      (parent, args, { entityAuthenticated, db }: ResolverContext) => db!.Item.findAll<ItemInstance>({
+        where: {
+          restaurantId: entityAuthenticated!.restaurant,
+        },
+      }),
     ),
     itemsByCategory: compose<any, ResolverContext>(authResolver, verifyTokenResolver)(
       (parent, args, { entityAuthenticated, db }: ResolverContext) => {
-        const {category} = <ItemsByCategoryInterface> args;
+        const { category } = <ItemsByCategoryInterface> args;
         return db!.Item.findAll<ItemInstance>({
           where: {
             restaurantId: entityAuthenticated!.restaurant,
-            categoryId: category
-          }
+            categoryId: category,
+          },
         });
-      }
+      },
     ),
   },
   Mutation: {
@@ -44,8 +42,7 @@ export const itemResolver = {
       (parent, { input }, { entityAuthenticated, db }: ResolverContext) => {
         const { restaurant: restaurantId, loginType } = entityAuthenticated!;
         // só o adm pode criar
-        if (loginType !== CollaboratorAccessTypeEnum.ADMIN)
-          throw new Error('Just ADM can create new items');
+        if (loginType !== CollaboratorAccessTypeEnum.ADMIN) throw new Error('Just ADM can create new items');
 
         const { name, categoryId, amount } = <CreateItemInput>input;
         return db!.Item.create({
@@ -55,15 +52,11 @@ export const itemResolver = {
           amount,
           status: ItemStatusEnum.ACTIVE,
         });
-      }
-    )
+      },
+    ),
   },
   Item: {
-    category: (item: ItemInstance, args, { dataLoaders: { categoryLoader } }: { dataLoaders: DataLoaders }) => {
-      return categoryLoader.load(item.categoryId!);
-    },
-    restaurant: (item: ItemInstance, args, { dataLoaders: { restaurantLoader } }: { dataLoaders: DataLoaders }) => {
-      return restaurantLoader.load(item.restaurantId!);
-    }
-  }
+    category: (item: ItemInstance, args, { dataLoaders: { categoryLoader } }: { dataLoaders: DataLoaders }) => categoryLoader.load(item.categoryId!),
+    restaurant: (item: ItemInstance, args, { dataLoaders: { restaurantLoader } }: { dataLoaders: DataLoaders }) => restaurantLoader.load(item.restaurantId!),
+  },
 };

@@ -28,4 +28,4 @@ const clientMutations = `
   initSession(input: InitSessionInput!): Order
 `;
 
-export { clientTypes, clientQueries, clientMutations }
+export { clientTypes, clientQueries, clientMutations };

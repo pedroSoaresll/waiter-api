@@ -5,19 +5,19 @@ import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { QRCodeContentInterface } from '../interfaces/QRCodeContentInterface';
 
 export interface TableAttributes {
-  id?: string
-  restaurantId?: string
-  name?: string
-  qrcode?: string
-  status?: TableStatusEnum
-  createdAt?: string
-  updatedAt?: string
+  id?: string;
+  restaurantId?: string;
+  name?: string;
+  qrcode?: string;
+  status?: TableStatusEnum;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CreateWithQRCodeInterface {
-  name: string
-  restaurantId: string
-  status: TableStatusEnum
+  name: string;
+  restaurantId: string;
+  status: TableStatusEnum;
 }
 
 export enum TableStatusEnum {
@@ -35,7 +35,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -44,7 +44,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     qrcode: {
       type: DataTypes.TEXT,
       allowNull: true,
-      defaultValue: null
+      defaultValue: null,
     },
     status: {
       type: DataTypes.ENUM(['INACTIVE', 'ACTIVE']),
@@ -55,14 +55,14 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     timestamps: true,
     name: {
       plural: 'tables',
-      singular: 'table'
-    }
+      singular: 'table',
+    },
   });
 
   Table.afterCreate(async (table: TableInstance) => {
     const qrcodeContent: QRCodeContentInterface = {
       restaurantId: table.restaurantId!,
-      tableId: table.id!
+      tableId: table.id!,
     };
     const qrcodeContentString = JSON.stringify(qrcodeContent);
 
@@ -71,13 +71,13 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
         if (!err) resolve(result);
         reject(err);
       });
-    }).catch(error => {
+    }).catch((error) => {
       console.log('error to generate qrcode', error);
       throw error;
     });
 
     return table.updateAttributes({
-      qrcode: qrcodeGenerated
+      qrcode: qrcodeGenerated,
     });
   });
 
@@ -87,19 +87,17 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
         allowNull: false,
         field: 'restaurant',
       },
-      as: 'restaurant'
+      as: 'restaurant',
     });
   };
 
-  Table.prototype.createWithQRCode = async ({ name, restaurantId, status }: CreateWithQRCodeInterface): Promise<TableInstance> => {
-    return Table.create({
-      name,
-      restaurantId,
-      status
-    }).catch(error => {
-      throw error;
-    });
-  };
+  Table.prototype.createWithQRCode = async ({ name, restaurantId, status }: CreateWithQRCodeInterface): Promise<TableInstance> => Table.create({
+    name,
+    restaurantId,
+    status,
+  }).catch((error) => {
+    throw error;
+  });
 
   return Table;
-}
+};

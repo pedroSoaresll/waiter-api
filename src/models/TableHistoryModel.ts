@@ -6,13 +6,13 @@ import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface TableHistoryAttributes {
-  id: string
-  table: TableAttributes
-  client: ClientAttributes
-  order: OrderAttributes
-  createdAt: Date
-  updatedAt: Date
-  unemploymentAt: Date
+  id: string;
+  table: TableAttributes;
+  client: ClientAttributes;
+  order: OrderAttributes;
+  createdAt: Date;
+  updatedAt: Date;
+  unemploymentAt: Date;
 }
 
 export interface TableHistoryInstance extends Sequelize.Instance<TableHistoryAttributes>, TableHistoryAttributes {}
@@ -25,12 +25,12 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     unemploymentAt: {
       type: DataTypes.DATE,
-      comment: 'Time that the user exit'
-    }
+      comment: 'Time that the user exit',
+    },
   }, {
     tableName: 'tableHistories',
     timestamps: true,
@@ -40,24 +40,24 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     TableHistory.belongsTo(models.Table, {
       foreignKey: {
         allowNull: false,
-        field: 'table'
-      }
+        field: 'table',
+      },
     });
 
     TableHistory.belongsTo(models.Client, {
       foreignKey: {
         allowNull: false,
-        field: 'client'
-      }
+        field: 'client',
+      },
     });
 
     TableHistory.belongsTo(models.Order, {
       foreignKey: {
         allowNull: false,
-        field: 'order'
-      }
+        field: 'order',
+      },
     });
   };
 
   return TableHistory;
-}
+};

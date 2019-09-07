@@ -29,4 +29,4 @@ const categoryMutations = `
   createCategory(input: CreateCategoryInput!): Category!
 `;
 
-export { categoryTypes, categoryQueries, categoryMutations }
+export { categoryTypes, categoryQueries, categoryMutations };

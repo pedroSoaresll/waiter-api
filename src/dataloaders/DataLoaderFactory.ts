@@ -17,23 +17,23 @@ export class DataLoaderFactory {
   getLoaders(): DataLoaders {
     return {
       restaurantLoader: new DataLoader<string, RestaurantInstance>(
-        (ids: string[]) => RestaurantLoader.batchRestaurants(this.db.Restaurant, ids)
+        (ids: string[]) => RestaurantLoader.batchRestaurants(this.db.Restaurant, ids),
       ),
       collaboratorAccessLoader: new DataLoader<string, CollaboratorAccessInstance>(
-        (ids: string[]) => CollaboratorAccessLoader.batchCollaboratorAccess(this.db.CollaboratorAccess, ids)
+        (ids: string[]) => CollaboratorAccessLoader.batchCollaboratorAccess(this.db.CollaboratorAccess, ids),
       ),
       collaboratorAccessCollaboratorLoader: new DataLoader<string, CollaboratorAccessInstance>(
-        (ids: string[]) => CollaboratorAccessLoader.batchCollaboratorAccessCollaborator(this.db.CollaboratorAccess, ids)
+        (ids: string[]) => CollaboratorAccessLoader.batchCollaboratorAccessCollaborator(this.db.CollaboratorAccess, ids),
       ),
       collaboratorAccessRestaurantLoader: new DataLoader<string, CollaboratorAccessInstance>(
-        (ids: string[]) => CollaboratorAccessLoader.batchCollaboratorAccessRestaurant(this.db.CollaboratorAccess, ids)
+        (ids: string[]) => CollaboratorAccessLoader.batchCollaboratorAccessRestaurant(this.db.CollaboratorAccess, ids),
       ),
       collaboratorLoader: new DataLoader<string, CollaboratorInstance>(
-        (ids: string[]) => CollaboratorLoader.bathCollaborators(this.db.Collaborator, ids)
+        (ids: string[]) => CollaboratorLoader.bathCollaborators(this.db.Collaborator, ids),
       ),
       categoryLoader: new DataLoader<string, CategoryInstance>(
-        (ids: string[]) => CategoryLoader.batchCategories(this.db.Category, ids)
-      )
+        (ids: string[]) => CategoryLoader.batchCategories(this.db.Category, ids),
+      ),
     };
   }
 }

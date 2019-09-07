@@ -11,10 +11,11 @@ import { normalizePort } from './utils/utils';
 const port = normalizePort(process.env.port || 3000);
 
 class App {
-
   public express: express.Application;
-  private dataLoaderFactory!: DataLoaderFactory;
-  private requestedFields!: RequestedFields;
+
+  public dataLoaderFactory!: DataLoaderFactory;
+
+  public requestedFields!: RequestedFields;
 
   constructor() {
     this.express = express();
@@ -32,20 +33,19 @@ class App {
     this.express.use('/graphql',
       extractJwtMiddleware(),
 
-      (req, res, next) => {
-        req['context']['db'] = db;
-        req['context']['dataLoaders'] = this.dataLoaderFactory.getLoaders();
-        req['context']['requestedFields'] = this.requestedFields;
+      (req:any, res, next) => {
+        req.context.db = db;
+        req.context.dataLoaders = this.dataLoaderFactory.getLoaders();
+        req.context.requestedFields = this.requestedFields;
         next();
       },
 
-      graphqlHTTP(req => ( {
-          schema,
-          graphiql: process.env.NODE_ENV === 'development',
-          context: req['context'],
-          subscriptionsEndpoint: `ws://localhost:${ port }/subscription`,
-        } )
-      ));
+      graphqlHTTP((req:any) => ({
+        schema,
+        graphiql: process.env.NODE_ENV === 'development',
+        context: req.context,
+        subscriptionsEndpoint: `ws://localhost:${port}/subscription`,
+      })));
   }
 }
 

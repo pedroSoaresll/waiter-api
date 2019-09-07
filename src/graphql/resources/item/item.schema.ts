@@ -34,4 +34,4 @@ const itemMutations = `
   createItem(input: CreateItemInput!): Item!
 `;
 
-export { itemTypes, itemQueries, itemMutations }
+export { itemTypes, itemQueries, itemMutations };

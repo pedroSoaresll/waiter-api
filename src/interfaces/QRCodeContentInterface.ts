@@ -1,4 +1,4 @@
 export interface QRCodeContentInterface {
-  restaurantId: string
-  tableId: string
+  restaurantId: string;
+  tableId: string;
 }

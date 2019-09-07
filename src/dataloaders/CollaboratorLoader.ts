@@ -6,10 +6,10 @@ export class CollaboratorLoader {
       collaborator.findAll({
         where: {
           id: {
-            $in: ids
-          }
-        }
-      })
+            $in: ids,
+          },
+        },
+      }),
     );
   }
 }

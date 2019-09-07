@@ -5,10 +5,10 @@ import { CollaboratorInstance } from '../models/CollaboratorModel';
 import { CategoryInstance } from '../models/CategoryModel';
 
 export interface DataLoaders {
-  restaurantLoader: DataLoader<string, RestaurantInstance>
-  categoryLoader: DataLoader<string, CategoryInstance>
-  collaboratorLoader: DataLoader<string, CollaboratorInstance>
-  collaboratorAccessLoader: DataLoader<string, CollaboratorAccessInstance>
-  collaboratorAccessCollaboratorLoader: DataLoader<string, CollaboratorAccessInstance>
-  collaboratorAccessRestaurantLoader: DataLoader<string, CollaboratorAccessInstance>
+  restaurantLoader: DataLoader<string, RestaurantInstance>;
+  categoryLoader: DataLoader<string, CategoryInstance>;
+  collaboratorLoader: DataLoader<string, CollaboratorInstance>;
+  collaboratorAccessLoader: DataLoader<string, CollaboratorAccessInstance>;
+  collaboratorAccessCollaboratorLoader: DataLoader<string, CollaboratorAccessInstance>;
+  collaboratorAccessRestaurantLoader: DataLoader<string, CollaboratorAccessInstance>;
 }

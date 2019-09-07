@@ -3,16 +3,16 @@ import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface ItemAttributes {
-  id?: string
-  categoryId?: string
-  restaurantId?: string
-  name?: string
-  description?: string
-  image?: string
-  amount?: number
-  status?: ItemStatusEnum
-  createdAt?: Date
-  updatedAt?: Date
+  id?: string;
+  categoryId?: string;
+  restaurantId?: string;
+  name?: string;
+  description?: string;
+  image?: string;
+  amount?: number;
+  status?: ItemStatusEnum;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export enum ItemStatusEnum {
@@ -30,7 +30,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -51,33 +51,33 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     status: {
       type: DataTypes.ENUM(['INACTIVE', 'ACTIVE']),
       allowNull: false,
-    }
+    },
   }, {
     tableName: 'items',
     timestamps: true,
     name: {
       plural: 'items',
-      singular: 'item'
-    }
+      singular: 'item',
+    },
   });
 
   Item.associate = (models: ModelsInterface): void => {
     Item.belongsTo(models.Restaurant, {
       foreignKey: {
         allowNull: false,
-        field: 'restaurant'
+        field: 'restaurant',
       },
-      as: 'restaurant'
+      as: 'restaurant',
     });
 
     Item.belongsTo(models.Category, {
       foreignKey: {
         allowNull: true,
-        field: 'category'
+        field: 'category',
       },
-      as: 'category'
+      as: 'category',
     });
   };
 
   return Item;
-}
+};

@@ -3,13 +3,13 @@ import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface CategoryAttributes {
-  id?: string
-  restaurantId?: string
-  name?: string
-  icon?: string
-  status?: CategoryStatusEnum
-  createdAt?: Date
-  updatedAt?: Date
+  id?: string;
+  restaurantId?: string;
+  name?: string;
+  icon?: string;
+  status?: CategoryStatusEnum;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export enum CategoryStatusEnum {
@@ -27,7 +27,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -35,11 +35,11 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     },
     icon: {
       type: DataTypes.STRING,
-      defaultValue: null
+      defaultValue: null,
     },
     status: {
-      type: DataTypes.ENUM([CategoryStatusEnum.ACTIVE, CategoryStatusEnum.INACTIVE])
-    }
+      type: DataTypes.ENUM([CategoryStatusEnum.ACTIVE, CategoryStatusEnum.INACTIVE]),
+    },
   }, {
     tableName: 'categories',
     timestamps: true,
@@ -50,9 +50,9 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       foreignKey: {
         allowNull: false,
         field: 'restaurant',
-      }
+      },
     });
   };
 
   return Category;
-}
+};

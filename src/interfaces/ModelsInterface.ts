@@ -10,14 +10,14 @@ import { CollaboratorModel } from '../models/CollaboratorModel';
 import { CollaboratorAccessModel } from '../models/CollaboratorAccessModel';
 
 export interface ModelsInterface {
-  Client: ClientModel
-  Restaurant: RestaurantModel
-  Category: CategoryModel
-  Item: ItemModel
-  Order: OrderModel
-  Table: TableModel
-  OrderItem: OrderItemModel
-  TableHistory: TableHistoryModel
-  Collaborator: CollaboratorModel
-  CollaboratorAccess: CollaboratorAccessModel
+  Client: ClientModel;
+  Restaurant: RestaurantModel;
+  Category: CategoryModel;
+  Item: ItemModel;
+  Order: OrderModel;
+  Table: TableModel;
+  OrderItem: OrderItemModel;
+  TableHistory: TableHistoryModel;
+  Collaborator: CollaboratorModel;
+  CollaboratorAccess: CollaboratorAccessModel;
 }

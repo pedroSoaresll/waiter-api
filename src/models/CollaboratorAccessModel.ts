@@ -15,14 +15,14 @@ export enum CollaboratorAccessStatusEnum {
 }
 
 export interface CollaboratorAccessAttributes {
-  id?: string
-  restaurant?: RestaurantAttributes
-  collaborator?: CollaboratorAttributes
-  accessType?: CollaboratorAccessTypeEnum
-  status?: CollaboratorAccessStatusEnum
-  inActivity?: boolean
-  createdAt?: Date
-  updatedAt?: Date
+  id?: string;
+  restaurant?: RestaurantAttributes;
+  collaborator?: CollaboratorAttributes;
+  accessType?: CollaboratorAccessTypeEnum;
+  status?: CollaboratorAccessStatusEnum;
+  inActivity?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface CollaboratorAccessInstance extends Sequelize.Instance<CollaboratorAccessAttributes>, CollaboratorAccessAttributes {}
@@ -35,7 +35,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     accessType: {
       type: DataTypes.ENUM(['ADMIN', 'COMMON']),
@@ -48,30 +48,30 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     inActivity: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   }, {
     tableName: 'collaborators_access',
-    timestamps: true
+    timestamps: true,
   });
 
   CollaboratorAccess.associate = (models: ModelsInterface): void => {
     CollaboratorAccess.belongsTo(models.Restaurant, {
       foreignKey: {
         allowNull: true,
-        field: 'restaurant'
+        field: 'restaurant',
       },
-      as: 'restaurant'
+      as: 'restaurant',
     });
 
     CollaboratorAccess.belongsTo(models.Collaborator, {
       foreignKey: {
         allowNull: true,
-        field: 'collaborator'
+        field: 'collaborator',
       },
-      as: 'collaborator'
+      as: 'collaborator',
     });
   };
 
   return CollaboratorAccess;
-}
+};

@@ -14,25 +14,21 @@ const logger = Logger('GRAPHQL:RESTAURANT:RESOLVER');
 
 
 export interface CreateRestaurantInput {
-  displayName: string
-  collaboratorName: string
-  email: string
-  password: string
+  displayName: string;
+  collaboratorName: string;
+  email: string;
+  password: string;
 }
 
 export const restaurantResolvers = {
   Restaurant: {
-    collaboratorsAccess: (restaurant, args, { dataLoaders: { collaboratorAccessRestaurantLoader } }: { dataLoaders: DataLoaders }) => {
-      return collaboratorAccessRestaurantLoader.loadMany([restaurant.id]);
-    }
+    collaboratorsAccess: (restaurant, args, { dataLoaders: { collaboratorAccessRestaurantLoader } }: { dataLoaders: DataLoaders }) => collaboratorAccessRestaurantLoader.loadMany([restaurant.id]),
   },
   Query: {
-    restaurants: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, args, { db }: ResolverContext, info: GraphQLResolveInfo) => {
-      return db!.Restaurant.findAll().catch(error => {
-        logger.error('error to create a new estabelecimento', { error });
-        throw new Error('Houve um problema ao tentar buscar os estabelecimentos');
-      });
-    })
+    restaurants: compose<any, ResolverContext>(authResolver, verifyTokenResolver)((parent, args, { db }: ResolverContext, info: GraphQLResolveInfo) => db!.Restaurant.findAll().catch((error) => {
+      logger.error('error to create a new estabelecimento', { error });
+      throw new Error('Houve um problema ao tentar buscar os estabelecimentos');
+    })),
   },
   Mutation: {
     createRestaurant: async (parent, { input }: { input: CreateRestaurantInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
@@ -60,9 +56,9 @@ export const restaurantResolvers = {
             collaborator: {
               name: input.collaboratorName,
               email: input.email,
-              password
-            }
-          }
+              password,
+            },
+          },
         }, {
           include: [
             {
@@ -71,24 +67,22 @@ export const restaurantResolvers = {
               include: [
                 {
                   model: db.Collaborator,
-                  as: 'collaborator'
-                }
-              ]
-            }
-          ]
+                  as: 'collaborator',
+                },
+              ],
+            },
+          ],
         });
 
-        if (!restaurant)
-          throw new Error('Error to create CollaboratorAccess + Restaurant + Collaborator: ');
+        if (!restaurant) throw new Error('Error to create CollaboratorAccess + Restaurant + Collaborator: ');
 
         logger.info('Data created', { collaboratorAccess: restaurant });
 
         return restaurant;
-
       } catch (e) {
         logger.error('Error in createRestaurant mutation: ', { e });
         throw e;
       }
-    }
-  }
+    },
+  },
 };

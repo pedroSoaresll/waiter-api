@@ -8,9 +8,9 @@ import { mustBeCollaborator } from '../../../composables/must-be-collaborator.re
 import { CollaboratorEntityAuthenticated } from '../../../interfaces/EntityAuthenticatedInterface';
 
 interface CreateTableInput {
-  restaurant: string
-  name: string
-  status?: TableStatusEnum
+  restaurant: string;
+  name: string;
+  status?: TableStatusEnum;
 }
 
 export const tableResolvers = {
@@ -21,15 +21,15 @@ export const tableResolvers = {
         return db!.Table.findAll({
           where: {
             restaurantId,
-          }
+          },
         });
-      }
-    )
+      },
+    ),
   },
   Mutation: {
     createTable: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
       async (parent, { input }, { db, entityAuthenticated }: ResolverContext) => {
-        const {restaurant: collaboratorRestaurant} = <CollaboratorEntityAuthenticated>entityAuthenticated;
+        const { restaurant: collaboratorRestaurant } = <CollaboratorEntityAuthenticated>entityAuthenticated;
         const { name, restaurant, status } = <CreateTableInput>input;
 
         if (!name) throw new Error('Name is required');
@@ -39,18 +39,16 @@ export const tableResolvers = {
         return await db!.Table.prototype.createWithQRCode({
           name,
           restaurantId: restaurant,
-          status: status || TableStatusEnum.ACTIVE
+          status: status || TableStatusEnum.ACTIVE,
         });
-      }
-    )
+      },
+    ),
   },
   Table: {
-    restaurant: (table, args, { db }: { db: DbConnection }) => {
-      return db.Restaurant.find({
-        where: {
-          id: table.restaurantId
-        }
-      });
-    }
-  }
+    restaurant: (table, args, { db }: { db: DbConnection }) => db.Restaurant.find({
+      where: {
+        id: table.restaurantId,
+      },
+    }),
+  },
 };

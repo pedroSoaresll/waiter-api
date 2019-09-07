@@ -4,15 +4,15 @@ import { BaseModelInterface } from '../interfaces/BaseModelInterface';
 import { ItemInstance } from './ItemModel';
 
 export interface OrderItemAttributes {
-  id?: string
-  itemId?: string
-  orderId?: string
-  status?: OrderItemStatusEnum
-  createdAt?: Date
-  updatedAt?: Date
-  doingAt?: Date
-  doneAt?: Date
-  item?: ItemInstance
+  id?: string;
+  itemId?: string;
+  orderId?: string;
+  status?: OrderItemStatusEnum;
+  createdAt?: Date;
+  updatedAt?: Date;
+  doingAt?: Date;
+  doneAt?: Date;
+  item?: ItemInstance;
 }
 
 export enum OrderItemStatusEnum {
@@ -33,7 +33,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     status: {
       type: DataTypes.ENUM([
@@ -43,83 +43,78 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
         OrderItemStatusEnum.DONE,
         OrderItemStatusEnum.DELIVERED,
       ]),
-      allowNull: false
+      allowNull: false,
     },
     doingAt: {
       type: DataTypes.DATE,
     },
     doneAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     deliveredAt: {
-      type: DataTypes.DATE
-    }
+      type: DataTypes.DATE,
+    },
   }, {
-      tableName: 'orderItems',
-      timestamps: true
-    });
+    tableName: 'orderItems',
+    timestamps: true,
+  });
 
   OrderItem.associate = (models: ModelsInterface): void => {
     OrderItem.belongsTo(models.Item, {
       foreignKey: {
         allowNull: false,
-        field: 'item'
+        field: 'item',
       },
-      as: 'item'
+      as: 'item',
     });
 
     OrderItem.belongsTo(models.Order, {
       foreignKey: {
         allowNull: false,
-        field: 'order'
-      }
+        field: 'order',
+      },
     });
   };
 
   OrderItem.prototype.remove = (orderItem: OrderItemInstance) => {
     // if orderItem is canceled return error
-    if (orderItem.status === OrderItemStatusEnum.CANCELED)
-      throw new Error('OrderItem is already canceled');
+    if (orderItem.status === OrderItemStatusEnum.CANCELED) throw new Error('OrderItem is already canceled');
 
     // if orderItem is with done and doing status return error
-    if (orderItem.status !== OrderItemStatusEnum.PENDING)
-      throw new Error('This OrderItem can not be canceled');
+    if (orderItem.status !== OrderItemStatusEnum.PENDING) throw new Error('This OrderItem can not be canceled');
 
     // change status orderItem to canceled
     return orderItem.updateAttributes({
-      status: OrderItemStatusEnum.CANCELED
+      status: OrderItemStatusEnum.CANCELED,
     });
-  }
+  };
 
   OrderItem.prototype.doing = (orderItem: OrderItemInstance) => {
-    if (orderItem.status !== OrderItemStatusEnum.PENDING)
-      throw new Error('This OrderItem can not be updated');
+    if (orderItem.status !== OrderItemStatusEnum.PENDING) throw new Error('This OrderItem can not be updated');
 
     return orderItem.updateAttributes({
       status: OrderItemStatusEnum.DOING,
       doingAt: new Date(),
     });
-  }
+  };
 
   OrderItem.prototype.done = (orderItem: OrderItemInstance) => {
-    if (orderItem.status !== OrderItemStatusEnum.DOING)
-      throw new Error('This OrderItem can not be updated');
+    if (orderItem.status !== OrderItemStatusEnum.DOING) throw new Error('This OrderItem can not be updated');
 
     return orderItem.updateAttributes({
       status: OrderItemStatusEnum.DONE,
       doneAt: new Date(),
     });
-  }
+  };
 
   OrderItem.prototype.delivered = (orderItem: OrderItemInstance) => {
-    if (orderItem.status !== OrderItemStatusEnum.DONE)
-      throw new Error('This OrderItem can not be updated');
+    if (orderItem.status !== OrderItemStatusEnum.DONE) throw new Error('This OrderItem can not be updated');
 
     return orderItem.updateAttributes({
       status: OrderItemStatusEnum.DELIVERED,
       deliveredAt: new Date(),
     });
-  }
+  };
 
   return OrderItem;
-}
+};

@@ -11,36 +11,32 @@ import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { OrderInstance } from '../../../models/OrderModel';
 import { ItemInstance } from '../../../models/ItemModel';
 import { mustBeCollaborator } from '../../../composables/must-be-collaborator.resolver';
-import { subscriptionStatusChanged, GraphqlOrderItemSubscriptions, subscribes } from './orderItem.subscriptions'
+import { subscriptionStatusChanged, GraphqlOrderItemSubscriptions, subscribes } from './orderItem.subscriptions';
 
 interface CreateOrderItem {
-  itemId: string
+  itemId: string;
 }
 
 interface RemoveOrderItem {
-  orderItemId: string
+  orderItemId: string;
 }
 
 interface DoingOrderItem {
-  orderItemId: string
+  orderItemId: string;
 }
 
 interface DoneOrderItem {
-  orderItemId: string
+  orderItemId: string;
 }
 
 interface DeliveredOrderItem {
-  orderItemId: string
+  orderItemId: string;
 }
 
 export const orderItemResolver = {
   OrderItem: {
-    order: (OrderItem: OrderItemInstance, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-      return db.Order.findById<OrderInstance>(OrderItem.orderId);
-    },
-    item: (OrderItem: OrderItemInstance, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-      return db.Item.findById<ItemInstance>(OrderItem.itemId);
-    }
+    order: (OrderItem: OrderItemInstance, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => db.Order.findById<OrderInstance>(OrderItem.orderId),
+    item: (OrderItem: OrderItemInstance, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => db.Item.findById<ItemInstance>(OrderItem.itemId),
   },
   Query: {
     order: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeClient)(
@@ -52,13 +48,12 @@ export const orderItemResolver = {
         const order = await db!.Order.findById<OrderInstance>(clientEntityAuth.order);
 
         // check if client has order
-        if (!order)
-          throw new Error('Order not found');
+        if (!order) throw new Error('Order not found');
 
         // return order
         return order;
-      }
-    )
+      },
+    ),
   },
   Mutation: {
     createOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeClient)(
@@ -68,8 +63,7 @@ export const orderItemResolver = {
 
         // check order
         const order = await db!.Order.findById(orderId);
-        if (!order)
-          throw new Error('Order not found');
+        if (!order) throw new Error('Order not found');
 
         // todo: check if item exist
         // todo: check if item belongs to restaurant
@@ -78,9 +72,9 @@ export const orderItemResolver = {
         return await db!.OrderItem.create({
           orderId,
           itemId,
-          status: OrderItemStatusEnum.PENDING
+          status: OrderItemStatusEnum.PENDING,
         });
-      }
+      },
     ),
     removeOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeClient)(
       async (parent, { input }, { db, entityAuthenticated }: ResolverContext) => {
@@ -89,17 +83,15 @@ export const orderItemResolver = {
 
         // check order
         const order = await db!.Order.findById<OrderInstance>(orderId);
-        if (!order)
-          throw new Error('Order not found');
+        if (!order) throw new Error('Order not found');
 
         // get orderItem
         const orderItem = await db!.OrderItem.findById<OrderItemInstance>(orderItemId);
-        if (!orderItem)
-          throw new Error('OrderItem not found');
+        if (!orderItem) throw new Error('OrderItem not found');
 
         // remove order item
         return db!.OrderItem.prototype.remove(orderItem);
-      }
+      },
     ),
     doingOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
       async (parent, { input }, { db }: ResolverContext) => {
@@ -107,8 +99,7 @@ export const orderItemResolver = {
         // todo - check if order item belongs to restaurant from collaborator authenticated
         const orderItem = await db!.OrderItem.findById(param.orderItemId);
 
-        if (!orderItem)
-          throw new Error('OrderItem not found');
+        if (!orderItem) throw new Error('OrderItem not found');
 
         // update order item status to doing
         const orderItemUpdated = await db!.OrderItem.prototype.doing(orderItem);
@@ -116,7 +107,7 @@ export const orderItemResolver = {
         subscriptionStatusChanged(orderItem);
 
         return orderItemUpdated;
-      }
+      },
     ),
     doneOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
       async (parent, { input }, { db }: ResolverContext) => {
@@ -124,8 +115,7 @@ export const orderItemResolver = {
         // todo - check if order item belongs to restaurant from collaborator authenticated
         const orderItem = await db!.OrderItem.findById(param.orderItemId);
 
-        if (!orderItem)
-          throw new Error('OrderItem not found');
+        if (!orderItem) throw new Error('OrderItem not found');
 
         // update order item status to done
         const orderItemUpdated = await db!.OrderItem.prototype.doing(orderItem);
@@ -133,7 +123,7 @@ export const orderItemResolver = {
         subscriptionStatusChanged(orderItem);
 
         return orderItemUpdated;
-      }
+      },
     ),
     deliveredOrderItem: compose<any, ResolverContext>(authResolver, verifyTokenResolver, mustBeCollaborator)(
       async (parent, { input }, { db }: ResolverContext) => {
@@ -141,8 +131,7 @@ export const orderItemResolver = {
         // todo - check if OrderItem belongs to restaurant from collaborator authenticated
         const orderItem = await db!.OrderItem.findById(param.orderItemId);
 
-        if (!orderItem)
-          throw new Error('OrderItem not found');
+        if (!orderItem) throw new Error('OrderItem not found');
 
         // update OrderItem status to done
         const orderItemUpdated = await db!.OrderItem.prototype.delivered(orderItem);
@@ -151,12 +140,12 @@ export const orderItemResolver = {
         subscriptionStatusChanged(orderItem);
 
         return orderItemUpdated;
-      }
-    )
+      },
+    ),
   },
   Subscription: {
     orderItemStatusUpdated: {
       subscribe: subscribes.statusUpdated,
-    }
-  }
+    },
+  },
 };

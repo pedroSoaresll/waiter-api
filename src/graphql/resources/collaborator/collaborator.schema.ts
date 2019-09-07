@@ -25,4 +25,4 @@ const collaboratorMutations = `
   createCollaborator(input: CreateCollaboratorInput!): Collaborator!
 `;
 
-export { collaboratorTypes, collaboratorQueries, collaboratorMutations }
+export { collaboratorTypes, collaboratorQueries, collaboratorMutations };

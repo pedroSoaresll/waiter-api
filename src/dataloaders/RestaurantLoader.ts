@@ -6,10 +6,10 @@ export class RestaurantLoader {
       restaurant.findAll({
         where: {
           id: {
-            $in: ids
-          }
-        }
-      })
+            $in: ids,
+          },
+        },
+      }),
     );
   }
 }

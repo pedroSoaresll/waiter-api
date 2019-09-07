@@ -1,27 +1,29 @@
 import * as MAILGUN from 'mailgun-js';
-import {messages} from "mailgun-js";
+import { messages } from 'mailgun-js';
 
 interface HeaderMailgun {
-  to: string,
-  subject: string,
-  template: string
+  to: string;
+  subject: string;
+  html: string;
 }
 
 const mailgun = MAILGUN({
   apiKey: process.env.MAILGUN_API_KEY || 'not-found',
-  domain: process.env.MAILGUN_API_BASEURL || 'not-found',
+  domain: process.env.MAILGUN_DOMAIN || 'not-found',
 });
 
-const sendMessage = ({to, subject, template}: HeaderMailgun, data = {}): Promise<messages.SendResponse> => {
+const textDomain = `Pedro Oliveira <pedro@${process.env.MAILGUN_DOMAIN}>`;
+
+const sendMessage = ({ to, subject, html }: HeaderMailgun, data = {}): Promise<messages.SendResponse> => {
   const info = {
-    from: `Pedro Oliveira <${process.env.MAILGUN_API_BASEURL}>`,
+    from: textDomain,
     to,
     subject,
-    template,
+    html,
   };
 
-  return new Promise<messages.SendResponse>(async (resolve, reject) => {
-    await mailgun.messages().send(info, ((error, body) => {
+  return new Promise<messages.SendResponse>((resolve, reject) => {
+    mailgun.messages().send(info, ((error, body) => {
       if (error) {
         console.error('mailgun error', error);
         reject(error);
@@ -30,10 +32,11 @@ const sendMessage = ({to, subject, template}: HeaderMailgun, data = {}): Promise
 
       console.log('mailgun success', body);
       resolve(body);
-    }))
+    }));
   });
 };
 
 export {
+  mailgun,
   sendMessage,
 };

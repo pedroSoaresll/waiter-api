@@ -10,14 +10,14 @@ export enum CollaboratorStatusEnum {
 }
 
 export interface CollaboratorAttributes {
-  id?: string
-  name?: string
-  email?: string
-  password?: string
-  status?: CollaboratorStatusEnum
-  collaboratorsAccess?: [CollaboratorAccessAttributes]
-  createdAt?: Date
-  updatedAt?: Date
+  id?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  status?: CollaboratorStatusEnum;
+  collaboratorsAccess?: [CollaboratorAccessAttributes];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface CollaboratorInstance extends Sequelize.Instance<CollaboratorAttributes>, CollaboratorAttributes {}
@@ -30,7 +30,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -49,15 +49,15 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     status: {
       type: DataTypes.ENUM([CollaboratorStatusEnum.ACTIVE, CollaboratorStatusEnum.INACTIVE]),
       allowNull: false,
-      defaultValue: CollaboratorStatusEnum.ACTIVE
-    }
+      defaultValue: CollaboratorStatusEnum.ACTIVE,
+    },
   }, {
     tableName: 'collaborators',
     timestamps: true,
     name: {
       plural: 'collaborators',
-      singular: 'collaborator'
-    }
+      singular: 'collaborator',
+    },
   });
 
   Collaborator.associate = (models: ModelsInterface) => {
@@ -65,7 +65,7 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       foreignKey: {
         allowNull: true,
       },
-      as: 'collaboratorsAccess'
+      as: 'collaboratorsAccess',
     });
   };
 
@@ -75,4 +75,4 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
   };
 
   return Collaborator;
-}
+};

@@ -1,5 +1,5 @@
-import { PubSub, withFilter } from 'graphql-subscriptions'
-import { OrderItemInstance } from "../../../models/OrderItemModel";
+import { PubSub, withFilter } from 'graphql-subscriptions';
+import { OrderItemInstance } from '../../../models/OrderItemModel';
 import { compose } from '../../../composables/composable.resolver';
 import { ResolverContext } from '../../../interfaces/ResolverContextInterface';
 import { authResolver } from '../../../composables/auth.resolver';
@@ -14,7 +14,7 @@ export enum GraphqlOrderItemSubscriptions {
 
 export function subscriptionStatusChanged(orderItem: OrderItemInstance) {
   pubsub.publish(GraphqlOrderItemSubscriptions.STATUS_UPDATED, {
-    orderItemStatusUpdated: orderItem
+    orderItemStatusUpdated: orderItem,
   });
 }
 
@@ -24,8 +24,8 @@ export const subscribes = {
     compose<any, ResolverContext>(authResolver)(
       (payload, args, context, info) => {
         console.log('entrou na porra toda');
-        return true
-      }
-    )
-  )
-}
+        return true;
+      },
+    ),
+  ),
+};

@@ -11,8 +11,8 @@ const tableHistoryTypes = `
   }
 `;
 
-const tableHistoryQueries = ``;
+const tableHistoryQueries = '';
 
-const tableHistoryMutations = ``;
+const tableHistoryMutations = '';
 
-export { tableHistoryTypes, tableHistoryQueries, tableHistoryMutations }
+export { tableHistoryTypes, tableHistoryQueries, tableHistoryMutations };

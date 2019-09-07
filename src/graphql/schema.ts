@@ -63,7 +63,7 @@ export default makeExecutableSchema({
     restaurantTypes,
     tableTypes,
     tableHistoryTypes,
-    tokenTypes
+    tokenTypes,
   ],
   resolvers,
 });

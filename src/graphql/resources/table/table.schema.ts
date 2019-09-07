@@ -30,4 +30,4 @@ const tableMutations = `
   createTable(input: CreateTableInput!): Table!
 `;
 
-export { tableTypes, tableQueries, tableMutations }
+export { tableTypes, tableQueries, tableMutations };

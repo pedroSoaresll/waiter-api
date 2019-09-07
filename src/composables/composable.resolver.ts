@@ -6,12 +6,9 @@ export type ComposableResolver<TSource, TContext> =
 export function compose<TSource, TContext>(
   ...funcs: Array<ComposableResolver<TSource, TContext>>
 ): ComposableResolver<TSource, TContext> {
-
   if (funcs.length === 0) {
     // if no functions return the identity
-    return o => {
-      return o;
-    };
+    return (o) => o;
   }
 
   if (funcs.length === 1) {

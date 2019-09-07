@@ -20,10 +20,10 @@ const orderTypes = `
   }
 `;
 
-const orderQueries = ``;
+const orderQueries = '';
 
 const orderMutations = `
   closeOrder: Order!
 `;
 
-export { orderTypes, orderQueries, orderMutations }
+export { orderTypes, orderQueries, orderMutations };

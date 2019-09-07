@@ -5,46 +5,42 @@ import Logger from '../../../utils/logger';
 const logger = Logger('GRAPHQL:CLIENT:RESOLVER');
 
 interface CreateClientInput {
-  name: string
+  name: string;
 }
 
 interface InitSessionInput {
-  name: string
-  restaurant: string
-  table: string
+  name: string;
+  restaurant: string;
+  table: string;
 }
 
 export const clientResolvers = {
   Query: {
-    clients: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-      return db.Client.findAll()
-        .catch(error => {
-          logger.error('error to get all clients', { error });
-          throw error;
-        });
-    },
-    client: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
-      return db.Client.findOne({
-        where: {
-          id: args.id
-        },
-        limit: 1
-      }).catch(error => {
-        logger.error('error to get client', { error });
+    clients: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => db.Client.findAll()
+      .catch((error) => {
+        logger.error('error to get all clients', { error });
         throw error;
-      });
-    }
+      }),
+    client: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => db.Client.findOne({
+      where: {
+        id: args.id,
+      },
+      limit: 1,
+    }).catch((error) => {
+      logger.error('error to get client', { error });
+      throw error;
+    }),
   },
   Mutation: {
-    createClient: (parent, { input }: { input: CreateClientInput }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+    createClient: (parent, { input }: { input: CreateClientInput }, { db }: { db: DbConnection }) => {
       logger.info('create client input', { input });
 
       const name = input.name.trim();
       if (!name) throw new Error('Nome de cliente não é válido');
 
       return db.Client.create({
-        name
-      }).catch(error => {
+        name,
+      }).catch((error) => {
         logger.error('error to create a new client', { error });
         throw error;
       });
@@ -53,6 +49,6 @@ export const clientResolvers = {
       // todo create client
       // todo create restaurant
       // todo create order and set client + restaurant + table
-    }
-  }
+    },
+  },
 };

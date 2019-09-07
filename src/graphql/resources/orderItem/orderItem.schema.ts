@@ -53,4 +53,4 @@ const orderItemMutations = `
   deliveredOrderItem(input: DeliveredOrderItemInput!): OrderItem!
 `;
 
-export { orderItemTypes, orderItemQueries, orderItemMutations }
+export { orderItemTypes, orderItemQueries, orderItemMutations };

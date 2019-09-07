@@ -25,4 +25,4 @@ const restaurantMutations = `
   createRestaurant(input: CreateRestaurantInput!): Restaurant!
 `;
 
-export { restaurantTypes, restaurantQueries, restaurantMutations }
+export { restaurantTypes, restaurantQueries, restaurantMutations };

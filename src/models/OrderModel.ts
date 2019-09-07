@@ -4,15 +4,15 @@ import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { OrderItemInstance } from './OrderItemModel';
 
 export interface OrderAttributes {
-  id?: string
-  restaurantId?: string
-  tableId?: string
-  clientId?: string
-  orderItems?: OrderItemInstance[]
-  amount?: number
-  status?: OrderStatusEnum
-  createdAt?: Date
-  updatedAt?: Date
+  id?: string;
+  restaurantId?: string;
+  tableId?: string;
+  clientId?: string;
+  orderItems?: OrderItemInstance[];
+  amount?: number;
+  status?: OrderStatusEnum;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export enum OrderStatusEnum {
@@ -31,18 +31,18 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     amount: {
       type: DataTypes.FLOAT(5, 2),
       allowNull: true,
-      defaultValue: 0.00
+      defaultValue: 0.00,
     },
     status: {
       type: DataTypes.ENUM([
         OrderStatusEnum.PENDING,
         OrderStatusEnum.PROGRESS,
-        OrderStatusEnum.FINISH
+        OrderStatusEnum.FINISH,
       ]),
       allowNull: false,
     },
@@ -51,15 +51,15 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     timestamps: true,
     name: {
       plural: 'orders',
-      singular: 'order'
-    }
+      singular: 'order',
+    },
   });
 
   Order.associate = (models: ModelsInterface): void => {
     Order.belongsTo(models.Restaurant, {
       foreignKey: {
         allowNull: false,
-        field: 'restaurant'
+        field: 'restaurant',
       },
 
     });
@@ -67,25 +67,25 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes):
     Order.hasMany(models.OrderItem, {
       foreignKey: {
         allowNull: true,
-        field: 'order'
+        field: 'order',
       },
-      as: 'orderItems'
+      as: 'orderItems',
     });
 
     Order.belongsTo(models.Table, {
       foreignKey: {
         allowNull: false,
-        field: 'table'
-      }
+        field: 'table',
+      },
     });
 
     Order.belongsTo(models.Client, {
       foreignKey: {
         allowNull: false,
-        field: 'client'
-      }
+        field: 'client',
+      },
     });
   };
 
   return Order;
-}
+};

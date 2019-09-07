@@ -34,4 +34,4 @@ const collaboratorAccessMutations = `
   createCollaboratorAccess(input: CreateCollaboratorAccessInput!): CollaboratorAccess!
 `;
 
-export { collaboratorAccessTypes, collaboratorAccessQueries, collaboratorAccessMutations }
+export { collaboratorAccessTypes, collaboratorAccessQueries, collaboratorAccessMutations };

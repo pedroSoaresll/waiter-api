@@ -6,10 +6,10 @@ export class CategoryLoader {
       category.findAll({
         where: {
           id: {
-            $in: ids
-          }
-        }
-      })
+            $in: ids,
+          },
+        },
+      }),
     );
   }
 }
