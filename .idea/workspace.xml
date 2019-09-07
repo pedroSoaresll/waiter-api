@@ -2,81 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d974ea9-f712-4036-89b0-c5c930819842" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/eslintPlugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/tslint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emails/mjml/index.mjml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emails/mjml/test.mjml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/template-builder.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/eslintPlugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/eslintPlugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast/RequestedFields.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/RequestedFields.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commons/aws-sdk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/aws-sdk.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commons/enums/auth-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/enums/auth-types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commons/mailgun.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/mailgun.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composables/auth.resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/composables/auth.resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composables/composable.resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/composables/composable.resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composables/must-be-client.resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/composables/must-be-client.resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composables/must-be-collaborator-admin.resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/composables/must-be-collaborator-admin.resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composables/must-be-collaborator.resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/composables/must-be-collaborator.resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composables/verify-token.resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/composables/verify-token.resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataloaders/CategoryLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataloaders/CategoryLoader.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataloaders/CollaboratorAccessLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataloaders/CollaboratorAccessLoader.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataloaders/CollaboratorLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataloaders/CollaboratorLoader.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataloaders/DataLoaderFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataloaders/DataLoaderFactory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataloaders/RestaurantLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataloaders/RestaurantLoader.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/mutation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/mutation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/category/category.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/category/category.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/category/category.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/category/category.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/client/client.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/client/client.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/client/client.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/client/client.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/collaborator/collaborator.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/collaborator/collaborator.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/collaborator/collaborator.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/collaborator/collaborator.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/collaboratorAccess/collaboratorAccess.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/collaboratorAccess/collaboratorAccess.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/collaboratorAccess/collaboratorAccess.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/collaboratorAccess/collaboratorAccess.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/item/item.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/item/item.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/item/item.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/item/item.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/order/order.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/order/order.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.subscriptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/orderItem/orderItem.subscriptions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/restaurant/restaurant.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/restaurant/restaurant.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/restaurant/restaurant.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/restaurant/restaurant.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/table/table.resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/table/table.resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/table/table.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/table/table.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/tableHistory/tableHistory.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/tableHistory/tableHistory.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/resources/token/token.resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/resources/token/token.resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/BaseModelInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/BaseModelInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/DataLoadersInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/DataLoadersInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/DbConnectionInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/DbConnectionInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/EntityAuthenticatedInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/EntityAuthenticatedInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/ModelsInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ModelsInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/QRCodeContentInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/QRCodeContentInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/ResolverContextInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ResolverContextInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middlewares/extract-jwt.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/extract-jwt.middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/CategoryModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/CategoryModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ClientModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ClientModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/CollaboratorAccessModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/CollaboratorAccessModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/CollaboratorModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/CollaboratorModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ItemModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ItemModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/OrderItemModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/OrderItemModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/OrderModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/OrderModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/RestaurantModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/RestaurantModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/TableHistoryModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/TableHistoryModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/TableModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/TableModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/logger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,6 +33,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.linters.configure.manually.selectedeslint" value="true" />
     <property name="js.linters.configure.manually.selectedtslint" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -117,15 +47,15 @@
     <property name="node.js.selected.package.tslint" value="$PROJECT_DIR$/node_modules/tslint" />
     <property name="nodejs.jest.jest_package" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.tslint" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/commons" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -184,7 +114,7 @@
       <workItem from="1567878164265" duration="49000" />
       <workItem from="1567878220851" duration="3202000" />
       <workItem from="1567882787889" duration="7288000" />
-      <workItem from="1567890088032" duration="711000" />
+      <workItem from="1567890088032" duration="1050000" />
     </task>
     <task id="LOCAL-00001" summary=":fire: something">
       <created>1564356307875</created>
