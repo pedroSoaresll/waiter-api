@@ -8,6 +8,7 @@ import db from './models';
 import { normalizePort, onError, onListening } from './utils/utils';
 import schema from './graphql/schema';
 import AWS from './commons/aws-sdk'
+import { sendMessage } from "./commons/mailgun";
 
 let { S3 } = AWS();
 
@@ -20,7 +21,7 @@ console.log(process.env);
 
 db.sequelize.sync()
   .then(() => {
-    server.listen(port, () => {
+    server.listen(port, async () => {
       console.log(`GraphQL Server is now running on http://localhost:${ port }`);
 
       new SubscriptionServer({
@@ -31,6 +32,12 @@ db.sequelize.sync()
       }, {
         server,
         path: '/graphql',
+      });
+
+      await sendMessage({
+        to: 'pedrodepaivasoaresll@gmail.com',
+        subject: 'teste mailgun',
+        template: 'Ola mundo, primeiro email sendo enviado com o mailgun',
       });
     });
     server.on('error', onError(server));
