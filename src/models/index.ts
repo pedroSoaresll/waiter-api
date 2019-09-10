@@ -6,7 +6,6 @@ import { DbConnection } from '../interfaces/DbConnectionInterface';
 const basename: string = path.basename(module.filename);
 const env: string = process.env.NODE_ENV || 'development';
 
-let config = require(path.resolve(`${__dirname}./../config/config.json`))[env];
 let db;
 
 if (!db) {
@@ -49,10 +48,11 @@ if (!db) {
     $values: Op.values,
     $col: Op.col,
   };
-
-  config = { operatorsAliases, ...config };
-
-  const sequelize: Sequelize.Sequelize = new Sequelize(config.database, config.username, config.password, config);
+  
+  const sequelize: Sequelize.Sequelize = new Sequelize(process.env.DATABASE!, process.env.USERNAME!, process.env.PASSWORLD!, {
+    operatorsAliases,
+    dialect: process.env.DIALECT,
+  });
 
   fs
     .readdirSync(__dirname)

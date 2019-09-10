@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d974ea9-f712-4036-89b0-c5c930819842" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/template-builder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/tools/template-builder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +52,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/tools" />
       <recent name="$PROJECT_DIR$/src/commons" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -112,7 +115,8 @@
       <workItem from="1567878164265" duration="49000" />
       <workItem from="1567878220851" duration="3202000" />
       <workItem from="1567882787889" duration="7288000" />
-      <workItem from="1567890088032" duration="1446000" />
+      <workItem from="1567890088032" duration="2670000" />
+      <workItem from="1568076700830" duration="1166000" />
     </task>
     <task id="LOCAL-00001" summary=":fire: something">
       <created>1564356307875</created>
