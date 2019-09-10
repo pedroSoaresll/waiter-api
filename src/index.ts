@@ -1,6 +1,5 @@
 require('dotenv').config({});
 
-
 import { createServer } from 'http';
 import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
@@ -12,6 +11,7 @@ import AWS from './commons/aws-sdk';
 
 // execute tools
 import './tools/template-builder';
+import { compile } from './commons/nunjucks';
 
 const { S3 } = AWS();
 
@@ -38,3 +38,7 @@ db.sequelize.sync()
     server.on('error', onError(server));
     server.on('listening', onListening(server));
   });
+
+  console.log(compile('index', {
+    username: 'Pedro Oliveira',
+  }));
