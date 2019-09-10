@@ -14,7 +14,7 @@ import AWS from './commons/aws-sdk';
 const { S3 } = AWS();
 
 const server = createServer(app);
-const port = normalizePort(process.env.port || 3000);
+const port = normalizePort(process.env.APP_PORT || 3000);
 
 db.sequelize.sync()
   .then(() => {
@@ -31,6 +31,7 @@ db.sequelize.sync()
         server,
         path: '/graphql',
       });
+
     });
     server.on('error', onError(server));
     server.on('listening', onListening(server));
