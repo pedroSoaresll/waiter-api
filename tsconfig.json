@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "lib": ["es2018", "esnext.asynciterable"],
+    "lib": ["es2015", "esnext.asynciterable", "es2016"],
+    "target": "es2015",
     "sourceMap": true,
     "outDir": "dist",
     "noImplicitAny": false,
@@ -9,8 +10,7 @@
   },
   "compileOnSave": false,
   "include": [
-    "src/**/*.ts",
-    "src/**/*.json"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"

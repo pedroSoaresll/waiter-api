@@ -4,12 +4,14 @@ require('dotenv').config({});
 import { createServer } from 'http';
 import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
-
 import app from './app';
 import db from './models';
 import { normalizePort, onError, onListening } from './utils/utils';
 import schema from './graphql/schema';
 import AWS from './commons/aws-sdk';
+
+// execute tools
+import './tools/template-builder';
 
 const { S3 } = AWS();
 
