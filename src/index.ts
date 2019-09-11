@@ -13,7 +13,7 @@ import AWS from './commons/aws-sdk';
 import './tools/template-builder';
 import { compile } from './commons/nunjucks';
 
-const { S3 } = AWS();
+const { SQS } = AWS();
 
 const server = createServer(app);
 const port = normalizePort(process.env.APP_PORT || 3000);
@@ -39,6 +39,14 @@ db.sequelize.sync()
     server.on('listening', onListening(server));
   });
 
-  console.log(compile('index', {
-    username: 'Pedro Oliveira',
-  }));
+const sqs = new SQS({
+  endpoint: 'http://localhost:9324',
+});
+
+sqs.sendMessage({
+  MessageBody: JSON.stringify({
+    name: 'Pedro Oliveira',
+    nickname: 'Senhor das Estrelas',
+  }), /* required */
+  QueueUrl: `${process.env.AWS_SQS_ENDPOINT}/worker-email-sender`, /* required */
+}, (err, data) => console.log(err, data));
