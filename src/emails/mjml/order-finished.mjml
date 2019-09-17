@@ -1,0 +1,116 @@
+<mjml>
+  <mj-head>
+    <mj-title>E-mail de agradecimento pelo uso da plataforma</mj-title>
+    <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto:300,500"></mj-font>
+    <mj-attributes>
+      <mj-all font-family="Roboto, Helvetica, sans-serif"></mj-all>
+      <mj-text font-weight="300" font-size="16px" color="#616161" line-height="24px"></mj-text>
+      <mj-section padding="0px"></mj-section>
+    </mj-attributes>
+  </mj-head>
+
+  <mj-body>
+    <!-- presentation -->
+    <mj-section padding="20px 0">
+      <mj-column width="60%">
+        <mj-text font-size="10px"></mj-text>
+      </mj-column>
+      <mj-column width="40%">
+        <mj-text align="right"></mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column width="100%">
+        <mj-image href="https://recast.ai?ref=newsletter" src="https://cdn.recast.ai/newsletter/city-01.png"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column width="100%">
+        <mj-text align="center">{{ order.client.name }}</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column width="45%">
+        <mj-text align="center" font-weight="500" padding="0px" font-size="18px">Obrigado por utilizar nossa plataforma</mj-text>
+        <mj-divider border-width="2px" border-color="#616161"></mj-divider>
+        <mj-divider border-width="2px" border-color="#616161" width="45%"></mj-divider>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-top="30px">
+      <mj-column width="100%">
+        <mj-text>
+          <p>Olá!</p>
+          <p>Aqui está o resumo da sua visita hoje em {{ order.restaurant.name }}</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- end presentation -->
+
+    <mj-section>
+      <mj-column width="100%">
+        <mj-divider border-width="1px" border-color="#E0E0E0"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+    <!-- content -->
+    {% for item in items %}
+    <mj-section>
+      <mj-column width="75%">
+        <mj-text>
+          <h3 style="font-weight: bold; margin-top: 0; margin-bottom: 0">
+            {{ item.name }}
+          </h3>
+          <p style="font-size: 14px">{{ item.description }}</p>
+        </mj-text>
+      </mj-column>
+      <mj-column width="25%">
+        <mj-text>
+          <p>{{ item.price }}</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    {% endfor %}
+
+    <mj-section>
+      <mj-column width="70%">
+        <mj-text>
+          <p>Total da compra:</p>
+        </mj-text>
+      </mj-column>
+
+      <mj-column width="30%">
+        <mj-text>
+          <p style="font-weight: bold">R$ {{ order.total }}</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- end content -->
+
+    <!-- footer -->
+    <!-- <mj-section>
+      <mj-column width="65%"></mj-column>
+      <mj-column width="35%">
+        <mj-table>
+          <tr style="list-style: none;line-height:1">
+            <td> <a href="https://twitter.com/RecastAI">
+                <img width="25" src="https://cdn.recast.ai/newsletter/twitter.png" />
+              </a> </td>
+            <td> <a href="https://www.facebook.com/recastAI">
+                <img width="25" src="https://cdn.recast.ai/newsletter/facebook.png" />
+              </a> </td>
+            <td> <a href="https://medium.com/@RecastAI">
+                <img width="25" src="https://cdn.recast.ai/newsletter/medium.png" />
+              </a> </td>
+            <td> <a href="https://www.youtube.com/channel/UCA0UZlR8crpgwFiVaSTbVWw">
+                <img width="25" src="https://cdn.recast.ai/newsletter/youtube.png" />
+              </a> </td>
+            <td> <a href="https://plus.google.com/u/0/+RecastAi">
+                <img width="25" src="https://cdn.recast.ai/newsletter/google%2B.png" />
+              </a> </td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section> -->
+    <!-- end footer -->
+  </mj-body>
+</mjml>
