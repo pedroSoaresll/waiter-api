@@ -12,18 +12,9 @@ const getTemplate = (templateName): string | null => {
     console.error('error to get template file', e.message);
     return null;
   }
-  
-}
 
-const compile = (templateName: string, data: Object): string | null => {
-  const template: string | null = getTemplate(templateName)
-
-  if (!template) return null;
-
-  return nunjucks.renderString(template, data);
 }
 
 export {
   getTemplate,
-  compile,
 };

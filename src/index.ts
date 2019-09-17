@@ -11,7 +11,7 @@ import AWS from './commons/aws-sdk';
 
 // execute tools
 import './tools/template-builder';
-import { compile } from './commons/nunjucks';
+import { getTemplate } from './commons/emails';
 
 const { SQS } = AWS();
 
@@ -43,10 +43,16 @@ const sqs = new SQS({
   endpoint: 'http://localhost:9324',
 });
 
+const senderParams = {
+  html: getTemplate('index'),
+  data: {
+    username: 'Pedro Oliveira',
+    to: 'pedrodepaivasoaresll@gmail.com',
+    subject: 'Email automatico da aplicação',
+  },
+};
+
 sqs.sendMessage({
-  MessageBody: JSON.stringify({
-    name: 'Pedro Oliveira',
-    nickname: 'Senhor das Estrelas',
-  }), /* required */
+  MessageBody: JSON.stringify(senderParams), /* required */
   QueueUrl: `${process.env.AWS_SQS_ENDPOINT}/worker-email-sender`, /* required */
 }, (err, data) => console.log(err, data));
